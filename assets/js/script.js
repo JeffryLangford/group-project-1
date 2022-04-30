@@ -10,6 +10,28 @@ var parkingTarget = document.getElementById("parking");
 
 output.innerHTML = slider.value; // Display the default slider value
 
+// FOURSQUARE API REQUEST
+// foursquare Places API key fsq3Dd7JeFQQHyDysLsuKKzrNfbaWgHDH09HMsub7/9FfFA=
+
+
+const options = {
+  method: 'GET',
+  headers: {
+    Accept: 'application/json',
+    Authorization: 'fsq3Dd7JeFQQHyDysLsuKKzrNfbaWgHDH09HMsub7/9FfFA='
+  }
+};
+
+fetch('https://api.foursquare.com/v3/places/search?near=\'Austin, TX\'', options).then(response => {
+  if (response.ok) {
+      response.json().then(data => {
+          console.log(data);
+      });
+  } else {
+      alert("ERROR: NOT WORKING");
+  }
+}).catch(err => console.error(err));
+
 // Update the current slider value (each time you drag the slider handle)
 slider.oninput = function() {
   output.innerHTML = this.value;
@@ -45,3 +67,4 @@ parkingTarget.addEventListener('click', function () {
   parkingResults.classList.remove("hide");
   console.log("clicked parking");
 });
+
