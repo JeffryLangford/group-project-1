@@ -9,40 +9,40 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body class="bg-green-100 font-serif m-4 p-4 container w-screen">
-    <header id="header" class="border text-center p-3">
-        <h1 class="font-bold text-5xl">Project 1</h1>
+    <header id="header" class="text-center p-3 mb-3">
+        <h1 class="font-bold text-5xl">Date-night in Austin</h1>
     </header>
-    <main class="border text-center p-3">
+    <main class="text-center p-3">
         <div id="wrap">
             <h2 class="text-xl">Where would you like to search?</h2>
-            <div class="colums-5 mt-2 mb-3">
+            <div class="border-b-4 border-black columns-5 my-2 pb-6">
                 <ul class="inline-flex">
                     <li class="mx-4">
-                        <input data-lat="30.336543064363642" data-long="-97.96179871839252" id="bee-caves" type="radio"></input>
+                        <input name="location-selector" data-zone="bee-caves" id="bee-caves" type="radio"></input>
                         <h3 class="px-2 text-lg">Bee Caves</h3>
                     </li>
                     <li class="mx-4">
-                        <input data-lat="30.219860121093262" data-long="-97.83423339078256" id="southwest" type="radio"></input>
+                        <input name="location-selector" data-zone="southwest" id="southwest" type="radio"></input>
                         <h3 class="px-2 text-lg">Southwest Austin</h3>
                     </li>
                     <li class="mx-4">
-                        <input data-lat="30.267672625429736" data-long="-97.74555522257333" id="downtown" type="radio"></input>
+                        <input name="location-selector" data-zone="downtown" id="downtown" type="radio"></input>
                         <h3 class="px-2 text-lg">Downtown Austin</h3>
                     </li>
                     <li class="mx-4">
-                        <input data-lat="30.346023074489636" data-long="-97.71761880559511" id="north" type="radio"></input>
+                        <input name="location-selector" data-zone="north" id="north" type="radio"></input>
                         <h3 class="px-2 text-lg">North Austin</h3>
                     </li>
                     <li class="mx-4">
-                        <input data-lat="30.211144002203703" data-long="-97.70288903062384" id="southeast" type="radio"></input>
+                        <input name="location-selector" data-zone="southeast" id="southeast" type="radio"></input>
                         <h3 class="px-2 text-lg">Southeast Austin</h3>
                     </li>
                 </ul>
             </div>
             <br>
-            <h2 class="text-xl mt-3">Choose which tags you'd like to see in your results:</h2>
+            <h2 class="text-xl">Choose which tags you'd like to see in your results:</h2>
             </div>
-            <section id="section" class="p-3 columns-6 inline-flex justify-around w-5/6">
+            <section id="section" class="border-b-4 border-black p-3 columns-6 inline-flex justify-around w-5/6">
                 <ul>
                     <input id="drinks" type="radio"></input>
                     <h3 class="px-2 text-lg">drinks</h3>
@@ -203,12 +203,12 @@
         </div>
         <p id="error" class="text-red-700 mt-4 text-xl hide">Please choose a zone for your results.</p>
         <br>
-        <button id="submit-button" class="mx-2 text-white bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded">Submit</button>
-        <div id="weather-results" class="hide m-2">
+        <button id="submit-button" class="m-4 text-white bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded">Submit</button>
+        <div id="weather-results" class="border-b-4 border-black hide py-2 m-4">
             <p class="text-lg">The weather today will be 42 degrees with a 30% chance of rain.</p><br>
             <p>It will be windy with a wind-chill of 36 degrees.<p>
         </div>
-        <div id="location-results" class="hide m-2">
+        <div id="location-results" class="border-b-4 border-black hide py-2 m-4">
             <h2 class="text-xl">These are some of the events matching your tags:</h2>
             <ul>
                 <a href="" class="text-blue-500 hover:blue-700 hover:underline">Click here.</a>
@@ -216,7 +216,7 @@
                 <a href="" class="text-blue-500 hover:blue-700 hover:underline">Click here.</a>
             </ul> 
         </div>
-        <div id="popular-events" class="hide m-2">
+        <div id="popular-events" class="border-b-4 border-black hide py-2 m-4">
             <h2 class="text-xl">You might want to check out these popular events in your area:</h2>
             <ul>
                 <a href="" class="text-blue-500 hover:blue-700 hover:underline">Click here.</a>
@@ -224,7 +224,7 @@
                 <a href="" class="text-blue-500 hover:blue-700 hover:underline">Click here.</a>
             </ul>
         </div>
-        <button id="submit-button" class="m-4 text-white bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded hide">Go Back</button>
+        <button id="go-back-button" class="m-2 text-white bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded hide">Go Back</button>
     </main>
 </body>
 <script src="./assets/js/script.js"></script>

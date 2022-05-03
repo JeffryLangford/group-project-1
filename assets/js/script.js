@@ -1,11 +1,5 @@
-//const { stringify } = require("postcss");
-
 //variables needed for weather
-var beeCavesChosen = document.getElementById("bee-caves");
-var southwestChosen = document.getElementById("southwest");
-var downtownChosen = document.getElementById("downtown");
-var northChosen = document.getElementById("north");
-var southeastChosen = document.getElementById("southeast");
+var locationChosen = document.querySelector('input[name="locationSelector"]');
 
 //variables needed for fourqsuare
 var drinkEl = document.getElementById("drinks");
@@ -15,46 +9,19 @@ var foodEl = document.getElementById("food");
 var atmosphereEl = document.getElementById("atmosphere");
 var parkingEl = document.getElementById("parking");
 
-<<<<<<< HEAD
-// FOURSQUARE API REQUEST
-// foursquare Places API key fsq3Dd7JeFQQHyDysLsuKKzrNfbaWgHDH09HMsub7/9FfFA=
-
-
-const options = {
-  method: 'GET',
-  headers: {
-    Accept: 'application/json',
-    Authorization: 'fsq3Dd7JeFQQHyDysLsuKKzrNfbaWgHDH09HMsub7/9FfFA='
-  }
-};
-
-fetch('https://api.foursquare.com/v3/places/search?near=\'Austin, TX\'', options).then(response => {
-  if (response.ok) {
-      response.json().then(data => {
-          console.log(data);
-      });
-  } else {
-      alert("ERROR: NOT WORKING");
-  }
-}).catch(err => console.error(err));
-
-// Update the current slider value (each time you drag the slider handle)
-slider.oninput = function() {
-  output.innerHTML = this.value;
-}
-=======
 var weatherEl = document.getElementById("weather-results");
 var locationEl = document.getElementById("location-results");
 var popularEl = document.getElementById("popular-events");
->>>>>>> JeffryBranch
 
 //variables needed for functions and functionalty
 var wrapEl = document.getElementById("wrap");
 var sectionEl = document.getElementById("section");
 var errorEl = document.getElementById("error");
 var submitButton = document.getElementById("submit-button");
+var goBackButton = document.getElementById("go-back-button");
 
-//foursquare API
+// FOURSQUARE API REQUEST
+// foursquare Places API key fsq3Dd7JeFQQHyDysLsuKKzrNfbaWgHDH09HMsub7/9FfFA=
 const options = {
   method: 'GET',
   headers: {
@@ -78,7 +45,7 @@ drinkEl.addEventListener('click', function () {
   var drinkResults = document.getElementById("drink-results");
   if (drinkResults.classList.contains("hide")) {
   drinkResults.classList.remove("hide");
-  } else{
+  } else {
     drinkResults.classList.add("hide");
   }
   console.log("clicked drinks");
@@ -87,7 +54,7 @@ entertainmentEl.addEventListener('click', function () {
   var entertainmentResults = document.getElementById("entertainment-results");
   if (entertainmentResults.classList.contains("hide")) {
   entertainmentResults.classList.remove("hide");
-  } else{
+  } else {
     entertainmentResults.classList.add("hide");
   }
   console.log("clicked entertainment");
@@ -96,7 +63,7 @@ activeEl.addEventListener('click', function () {
   var activeResults = document.getElementById("active-results");
   if (activeResults.classList.contains("hide")) {
   activeResults.classList.remove("hide");
-  } else{
+  } else {
     activeResults.classList.add("hide");
   }
   console.log("clicked active");
@@ -105,7 +72,7 @@ foodEl.addEventListener('click', function () {
   var foodResults = document.getElementById("food-results");
   if (foodResults.classList.contains("hide")) {
   foodResults.classList.remove("hide");
-  } else{
+  } else {
     foodResults.classList.add("hide");
   }
   console.log("clicked food");
@@ -114,7 +81,7 @@ atmosphereEl.addEventListener('click', function () {
   var atmosphereResults = document.getElementById("atmosphere-results");
   if (atmosphereResults.classList.contains("hide")) {
   atmosphereResults.classList.remove("hide");
-  } else{
+  } else {
     atmosphereResults.classList.add("hide");
   }
   console.log("clicked atmosphere");
@@ -129,12 +96,10 @@ parkingEl.addEventListener('click', function () {
   console.log("clicked parking");
 });
 
-<<<<<<< HEAD
-=======
-
-//testing to store miles and range
+//if a location isn't selected, then the user is told to select one
+//when the submit button is clicked, change the page to the results page
 function submitResults () {
-  if (!beeCavesChosen && !southeastChosen && !downtownChosen && !northChosen && !southeastChosen) {
+  if (locationChosen) {
     errorEl.classList.remove("hide");
     return;
   }
@@ -145,8 +110,13 @@ function submitResults () {
   weatherEl.classList.remove("hide");
   locationEl.classList.remove("hide");
   popularEl.classList.remove("hide");
+  goBackButton.classList.remove("hide");
+}
+
+function goBack () {
+  location.reload();
 }
  
 //event listeners on buttons
 submitButton.addEventListener('click', submitResults);
->>>>>>> JeffryBranch
+goBackButton.addEventListener('click', goBack)
