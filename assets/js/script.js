@@ -173,7 +173,7 @@ function submitResults () {
   }
   
   // if zone selected grab related zone object
-  let zoneSelected = selectZoneHandler(selected);
+  zoneSelected = selectZoneHandler(selected);
   
   // testing the zone was selected
   console.log(zoneSelected.lat, zoneSelected.lon);
