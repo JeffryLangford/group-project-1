@@ -5,14 +5,192 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Group Project 1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" integrity="sha512-wnea99uKIC3TJF7v4eKk4Y+lMz2Mklv18+r4na2Gn1abDRPPOeef95xTzdwGD9e6zXJBteMIhZ1+68QC5byJZw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
-<body class="bg-sky-600">
-    <main class="m-5 p-5">
-        <h1>Project 1</h1>
-        <h2>Type your Address here:</h2>
-        <input></input><br>
-        <input type="radio"></input>
+<body class="bg-green-100 font-serif m-4 p-4 container w-screen">
+    <header class="border text-center p-3">
+        <h1 class="font-bold text-5xl">Project 1</h1>
+    </header>
+    <main class="border text-center p-3">
+        <div class="inline-flex mt-2 mb-3">
+            <p class="text-xl">Type your Address here:</p>
+            <input class="ml-2"></input>
+        </div>
+        <div class="slidecontainer text-center border">
+            <p class="text-xl">Choose the radius in which you'd like to search:</p>
+            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+            <p class="text-base"><span id="demo"></span> miles</p>
+          </div>
+        <br>
+        <p class="text-xl mt-3">Choose which tags you'd like to see in your results:</p>
+        </div>
+        <section class="p-3 columns-6 inline-flex justify-around w-5/6">
+            <ul>
+                <input id="drinks" type="radio"></input>
+                <h3 class="px-2 text-lg">drinks</h3>
+                <div id="drink-results" class="hide mt-3">
+                    <li>
+                        <input type="radio"></input>
+                        <p class="text-base">wine</p>
+                    </li>
+                    <li>
+                        <input type="radio"></input>
+                        <p class="text-base">beer</p>
+                    </li>
+                    <li>
+                        <input type="radio"></input>
+                    <p class="text-base">cocktails</p>
+                    </li>
+                    <li>
+                        <input type="radio"></input>
+                        <p class="text-base">liquor</p>
+                    </li>
+                    <li>
+                        <input type="radio"></input>
+                    <p class="text-base">non-alcoholic</p>
+                    </li>
+                </div>
+            </ul>
+            <ul>
+                <input id="entertainment" type="radio"></input>
+                <h3 class="text-lg">entertainment</h3>
+                <div id="entertainment-results" class="hide mt-3">
+                    <li>
+                        <input type="radio"></input>
+                        <p class="text-base">movies</p>
+                    </li>
+                    <li>
+                        <input type="radio"></input>
+                        <p class="text-base">comedy</p>
+                    </li>
+                    <li>
+                        <input type="radio"></input>
+                    <p class="text-base">nightlife</p>
+                    </li>
+                    <li>
+                        <input type="radio"></input>
+                        <p class="text-base">placeholder</p>
+                    </li>
+                    <li>
+                        <input type="radio"></input>
+                    <p class="text-base">placeholder</p>
+                    </li>
+                </div>
+            </ul>
+            <ul>
+                <input id="active" type="radio"></input>
+                <h3 class="text-lg">active</h3>
+                <div id="active-results" class="hide mt-3">
+                    <li>
+                        <input type="radio"></input>
+                        <p class="text-base">hiking</p>
+                    </li>
+                    <li>
+                        <input type="radio"></input>
+                        <p class="text-base">yoga</p>
+                    </li>
+                    <li>
+                        <input type="radio"></input>
+                    <p class="text-base">paintball</p>
+                    </li>
+                    <li>
+                        <input type="radio"></input>
+                        <p class="text-base">axe-throwing</p>
+                    </li>
+                    <li>
+                        <input type="radio"></input>
+                    <p class="text-base">pickle-ball</p>
+                    </li>
+                </div>
+            </ul>
+            <ul>
+                <input id="food" type="radio"></input>
+                <h3 class="text-lg">food</h3>
+                <div id="food-results" class="hide mt-3">
+                    <li>
+                        <input type="radio"></input>
+                        <p class="text-base">food trucks</p>
+                    </li>
+                    <li>
+                        <input type="radio"></input>
+                        <p class="text-base">tacos</p>
+                    </li>
+                    <li>
+                        <input type="radio"></input>
+                    <p class="text-base">sushi</p>
+                    </li>
+                    <li>
+                        <input type="radio"></input>
+                        <p class="text-base">mexican</p>
+                    </li>
+                    <li>
+                        <input type="radio"></input>
+                    <p class="text-base">vegan/vegetarian</p>
+                    </li>
+                </div>
+            </ul>
+            <ul>
+                <input id="atmosphere" type="radio"></input>
+                <h3 class="text-lg">atmosphere</h3>
+                <div id="atmosphere-results" class="hide mt-3">
+                    <li>
+                        <input type="radio"></input>
+                        <p class="text-base">casual</p>
+                    </li>
+                    <li>
+                        <input type="radio"></input>
+                        <p class="text-base">dressy</p>
+                    </li>
+                    <li>
+                        <input type="radio"></input>
+                    <p class="text-base">date-night</p>
+                    </li>
+                    <li>
+                        <input type="radio"></input>
+                        <p class="text-base">animal-friendly</p>
+                    </li>
+                    <li>
+                        <input type="radio"></input>
+                    <p class="text-base">child-friendly</p>
+                    </li>
+                </div>
+            </ul>
+            <ul>
+                <input id="parking" type="radio"></input>
+                <h3 class="text-lg">parking</h3>
+                <div id="parking-results" class="hide mt-3">
+                    <li>
+                        <input type="radio"></input>
+                        <p class="text-base">free</p>
+                    </li>
+                    <li>
+                        <input type="radio"></input>
+                        <p class="text-base">paid</p>
+                    </li>
+                    <li>
+                        <input type="radio"></input>
+                    <p class="text-base">limited</p>
+                    </li>
+                    <li>
+                        <input type="radio"></input>
+                        <p class="text-base">parking garage</p>
+                    </li>
+                    <li>
+                        <input type="radio"></input>
+                    <p class="text-base">valet</p>
+                    </li>
+                </div>
+            </ul>
+        </section>
+        <br>
+        <button id="submit-button" class="m-4 text-white bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded">Submit</button>
+        <div id="weather-results" class="hide"></div>
+        <div id="location-results" class="hide"></div>
+        <div id="popular-events" class="hide"></div>
+        <button id="submit-button" class="m-4 text-white bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded hide">Go Back</button>
     </main>
     <script src="./assets/js/script.js"></script>
 </body>
+<script src="./assets/js/script.js"></script>
 </html>
