@@ -1,15 +1,21 @@
-var slider = document.getElementById("myRange");
-var output = document.getElementById("demo");
+//const { stringify } = require("postcss");
 
-var drinkTarget = document.getElementById("drinks");
-var entertainmentTarget = document.getElementById("entertainment");
-var activeTarget = document.getElementById("active");
-var foodTarget = document.getElementById("food");
-var atmosphereTarget = document.getElementById("atmosphere");
-var parkingTarget = document.getElementById("parking");
+//variables needed for weather
+var beeCavesChosen = document.getElementById("bee-caves");
+var southwestChosen = document.getElementById("southwest");
+var downtownChosen = document.getElementById("downtown");
+var northChosen = document.getElementById("north");
+var southeastChosen = document.getElementById("southeast");
 
-output.innerHTML = slider.value; // Display the default slider value
+//variables needed for fourqsuare
+var drinkEl = document.getElementById("drinks");
+var entertainmentEl = document.getElementById("entertainment");
+var activeEl = document.getElementById("active");
+var foodEl = document.getElementById("food");
+var atmosphereEl = document.getElementById("atmosphere");
+var parkingEl = document.getElementById("parking");
 
+<<<<<<< HEAD
 // FOURSQUARE API REQUEST
 // foursquare Places API key fsq3Dd7JeFQQHyDysLsuKKzrNfbaWgHDH09HMsub7/9FfFA=
 
@@ -36,35 +42,111 @@ fetch('https://api.foursquare.com/v3/places/search?near=\'Austin, TX\'', options
 slider.oninput = function() {
   output.innerHTML = this.value;
 }
+=======
+var weatherEl = document.getElementById("weather-results");
+var locationEl = document.getElementById("location-results");
+var popularEl = document.getElementById("popular-events");
+>>>>>>> JeffryBranch
 
-drinkTarget.addEventListener('click', function () {
+//variables needed for functions and functionalty
+var wrapEl = document.getElementById("wrap");
+var sectionEl = document.getElementById("section");
+var errorEl = document.getElementById("error");
+var submitButton = document.getElementById("submit-button");
+
+//foursquare API
+const options = {
+  method: 'GET',
+  headers: {
+    Accept: 'application/json',
+    Authorization: 'fsq3Dd7JeFQQHyDysLsuKKzrNfbaWgHDH09HMsub7/9FfFA='
+  }
+};
+
+fetch('https://api.foursquare.com/v3/places/search?near=\'Austin, TX\'', options).then(response => {
+  if (response.ok) {
+      response.json().then(data => {
+          console.log(data);
+      });
+  } else {
+      alert("ERROR: NOT WORKING");
+  }
+}).catch(err => console.error(err));
+
+//when clicking the different categories, show more specific results
+drinkEl.addEventListener('click', function () {
   var drinkResults = document.getElementById("drink-results");
+  if (drinkResults.classList.contains("hide")) {
   drinkResults.classList.remove("hide");
+  } else{
+    drinkResults.classList.add("hide");
+  }
   console.log("clicked drinks");
 });
-entertainmentTarget.addEventListener('click', function () {
+entertainmentEl.addEventListener('click', function () {
   var entertainmentResults = document.getElementById("entertainment-results");
+  if (entertainmentResults.classList.contains("hide")) {
   entertainmentResults.classList.remove("hide");
+  } else{
+    entertainmentResults.classList.add("hide");
+  }
   console.log("clicked entertainment");
 });
-activeTarget.addEventListener('click', function () {
+activeEl.addEventListener('click', function () {
   var activeResults = document.getElementById("active-results");
+  if (activeResults.classList.contains("hide")) {
   activeResults.classList.remove("hide");
+  } else{
+    activeResults.classList.add("hide");
+  }
   console.log("clicked active");
 });
-foodTarget.addEventListener('click', function () {
+foodEl.addEventListener('click', function () {
   var foodResults = document.getElementById("food-results");
+  if (foodResults.classList.contains("hide")) {
   foodResults.classList.remove("hide");
+  } else{
+    foodResults.classList.add("hide");
+  }
   console.log("clicked food");
 });
-atmosphereTarget.addEventListener('click', function () {
+atmosphereEl.addEventListener('click', function () {
   var atmosphereResults = document.getElementById("atmosphere-results");
+  if (atmosphereResults.classList.contains("hide")) {
   atmosphereResults.classList.remove("hide");
+  } else{
+    atmosphereResults.classList.add("hide");
+  }
   console.log("clicked atmosphere");
 });
-parkingTarget.addEventListener('click', function () {
+parkingEl.addEventListener('click', function () {
   var parkingResults = document.getElementById("parking-results");
+  if (parkingResults.classList.contains("hide")) {
   parkingResults.classList.remove("hide");
+  } else {
+    parkingResults.classList.add("hide");
+  }
   console.log("clicked parking");
 });
 
+<<<<<<< HEAD
+=======
+
+//testing to store miles and range
+function submitResults () {
+  if (!beeCavesChosen && !southeastChosen && !downtownChosen && !northChosen && !southeastChosen) {
+    errorEl.classList.remove("hide");
+    return;
+  }
+  wrapEl.classList.add("hide");
+  sectionEl.classList.add("hide");
+  errorEl.classList.add("hide");
+  submitButton.classList.add("hide");
+  weatherEl.classList.remove("hide");
+  locationEl.classList.remove("hide");
+  popularEl.classList.remove("hide");
+}
+ 
+//event listeners on buttons
+submitButton.addEventListener('click', submitResults);
+>>>>>>> JeffryBranch
