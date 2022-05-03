@@ -10,9 +10,35 @@ var parkingTarget = document.getElementById("parking");
 
 output.innerHTML = slider.value; // Display the default slider value
 
-// FOURSQUARE API REQUEST
-// foursquare Places API key fsq3Dd7JeFQQHyDysLsuKKzrNfbaWgHDH09HMsub7/9FfFA=
+// zone objects 
+const downtownAustin = {
+  lat: "30.267672625429736",
+  lon: "-97.74555522257333"
+}
 
+const southEastAustin = {
+  lat: "30.211144002203703",
+  lon: "-97.70288903062384"
+}
+
+const southWestAustin = {
+  lat: "30.219860121093262",
+  lon: "-97.83423339078256"
+}
+
+const northAustin = {
+  lat: "30.346023074489636",
+  lon: "-97.71761880559511"
+}
+
+const beeCaves = {
+  lat: "30.336543064363642",
+  lon: "-97.96179871839252"
+}
+
+
+// FOURSQUARE API
+// foursquare authourization key: 'fsq3Dd7JeFQQHyDysLsuKKzrNfbaWgHDH09HMsub7/9FfFA='
 
 const options = {
   method: 'GET',
@@ -22,20 +48,19 @@ const options = {
   }
 };
 
-fetch('https://api.foursquare.com/v3/places/search?near=\'Austin, TX\'', options).then(response => {
+fetch('https://api.foursquare.com/v3/places/search?near=\'Austin, TX\'&categories=10000&sort=rating', options).then(response => {
   if (response.ok) {
       response.json().then(data => {
-          console.log(data);
+        
+          console.log(data['results']);
       });
   } else {
       alert("ERROR: NOT WORKING");
   }
 }).catch(err => console.error(err));
 
-// Update the current slider value (each time you drag the slider handle)
-slider.oninput = function() {
-  output.innerHTML = this.value;
-}
+// get most popular places based off of a zone and category
+
 
 drinkTarget.addEventListener('click', function () {
   var drinkResults = document.getElementById("drink-results");
