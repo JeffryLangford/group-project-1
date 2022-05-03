@@ -1,5 +1,5 @@
-//variables needed for weather
-var locationChosen = document.querySelector('input[name="locationSelector"]');
+// global variable for selected zone. value assigned by submit button.
+var zoneSelected;
 
 //variables needed for fourqsuare
 var drinkEl = document.getElementById("drinks");
@@ -36,8 +36,8 @@ const beeCaves = {
 }
 
 // FOURSQUARE API
-// foursquare authourization key: 'fsq3Dd7JeFQQHyDysLsuKKzrNfbaWgHDH09HMsub7/9FfFA='
 
+// foursquare authourization
 const options = {
   method: 'GET',
   headers: {
@@ -46,18 +46,22 @@ const options = {
   }
 };
 
-fetch('https://api.foursquare.com/v3/places/search?near=\'Austin, TX\'&categories=10000&sort=rating', options).then(response => {
-  if (response.ok) {
-      response.json().then(data => {
-        
-          console.log(data['results']);
-      });
-  } else {
-      alert("ERROR: NOT WORKING");
-  }
-}).catch(err => console.error(err));
-
 // get most popular places based off of a zone and category
+const findPlaceSelection = (zone) => {
+  fetch(`https://api.foursquare.com/v3/places/search?||=${zone.lat},${zone.lon}&radius=8047&categories=10000&sort=rating`, options).then(response => {
+    if (response.ok) {
+        response.json().then(data => {
+          
+            console.log(data['results']);
+        });
+    } else {
+        alert("ERROR: NOT WORKING");
+    }
+  }).catch(err => console.error(err));
+}
+
+// testing
+findPlaceSelection(downtownAustin);
 
 var weatherEl = document.getElementById("weather-results");
 var locationEl = document.getElementById("location-results");
@@ -70,6 +74,29 @@ var errorEl = document.getElementById("error");
 var submitButton = document.getElementById("submit-button");
 var goBackButton = document.getElementById("go-back-button");
 
+// handler for converting chosen zone to zone object
+const selectZoneHandler = zone => {
+  switch(zone) {
+    case "bee-caves":
+      return beeCaves;
+
+    case "southwest":
+      return southWestAustin;
+
+    case "downtown":
+      return downtownAustin;
+
+    case "north":
+      return northAustin;
+
+    case "southeast":
+      return southEastAustin;
+
+    default:
+      return false;
+  }
+}
+
 //when clicking the different categories, show more specific results
 drinkEl.addEventListener('click', function () {
   var drinkResults = document.getElementById("drink-results");
@@ -80,6 +107,7 @@ drinkEl.addEventListener('click', function () {
   }
   console.log("clicked drinks");
 });
+
 entertainmentEl.addEventListener('click', function () {
   var entertainmentResults = document.getElementById("entertainment-results");
   if (entertainmentResults.classList.contains("hide")) {
@@ -89,6 +117,7 @@ entertainmentEl.addEventListener('click', function () {
   }
   console.log("clicked entertainment");
 });
+
 activeEl.addEventListener('click', function () {
   var activeResults = document.getElementById("active-results");
   if (activeResults.classList.contains("hide")) {
@@ -98,6 +127,7 @@ activeEl.addEventListener('click', function () {
   }
   console.log("clicked active");
 });
+
 foodEl.addEventListener('click', function () {
   var foodResults = document.getElementById("food-results");
   if (foodResults.classList.contains("hide")) {
@@ -107,6 +137,7 @@ foodEl.addEventListener('click', function () {
   }
   console.log("clicked food");
 });
+
 atmosphereEl.addEventListener('click', function () {
   var atmosphereResults = document.getElementById("atmosphere-results");
   if (atmosphereResults.classList.contains("hide")) {
@@ -116,6 +147,7 @@ atmosphereEl.addEventListener('click', function () {
   }
   console.log("clicked atmosphere");
 });
+
 parkingEl.addEventListener('click', function () {
   var parkingResults = document.getElementById("parking-results");
   if (parkingResults.classList.contains("hide")) {
@@ -130,10 +162,22 @@ parkingEl.addEventListener('click', function () {
 //when the submit button is clicked, change the page to the results page
 //testing to store miles and range
 function submitResults () {
-  if (locationChosen) {
+  // grab selected zone
+  var locationSelectorEl = document.getElementsByName('location-selector');
+  var selected = Array.from(locationSelectorEl).find(location => location.checked).value;
+
+  // make sure zone was selected
+  if (!selected) {
     errorEl.classList.remove("hide");
     return;
   }
+  
+  // if zone selected grab related zone object
+  let zoneSelected = selectZoneHandler(selected);
+  
+  // testing the zone was selected
+  console.log(zoneSelected.lat, zoneSelected.lon);
+
   wrapEl.classList.add("hide");
   sectionEl.classList.add("hide");
   errorEl.classList.add("hide");
