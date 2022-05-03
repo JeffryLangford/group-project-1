@@ -1,9 +1,11 @@
 //const { stringify } = require("postcss");
 
 //variables needed for weather
-var slider = document.getElementById("mile-range");
-var milesValue = document.getElementById("miles-chosen");
-var addressValue = document.getElementById("address-input")
+var beeCavesChosen = document.getElementById("bee-caves");
+var southwestChosen = document.getElementById("southwest");
+var downtownChosen = document.getElementById("downtown");
+var northChosen = document.getElementById("north");
+var southeastChosen = document.getElementById("southeast");
 
 //variables needed for fourqsuare
 var drinkEl = document.getElementById("drinks");
@@ -22,12 +24,6 @@ var wrapEl = document.getElementById("wrap");
 var sectionEl = document.getElementById("section");
 var errorEl = document.getElementById("error");
 var submitButton = document.getElementById("submit-button");
-
-//slider bar functionality
-milesValue.innerHTML = slider.value; // Display the default slider value
-slider.oninput = function() {
-  milesValue.innerHTML = this.value;
-}
 
 //foursquare API
 const options = {
@@ -98,7 +94,7 @@ parkingEl.addEventListener('click', function () {
   var parkingResults = document.getElementById("parking-results");
   if (parkingResults.classList.contains("hide")) {
   parkingResults.classList.remove("hide");
-  } else{
+  } else {
     parkingResults.classList.add("hide");
   }
   console.log("clicked parking");
@@ -107,11 +103,7 @@ parkingEl.addEventListener('click', function () {
 
 //testing to store miles and range
 function submitResults () {
-  console.log(milesValue.innerHTML);
-  console.log(addressValue.value);
-  //var finalMiles = milesValue.innerHTML;
-  //var finalAddress = addressValue.value;
-  if (!addressValue.value) {
+  if (!beeCavesChosen && !southeastChosen && !downtownChosen && !northChosen && !southeastChosen) {
     errorEl.classList.remove("hide");
     return;
   }
