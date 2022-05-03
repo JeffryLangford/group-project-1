@@ -1,9 +1,11 @@
 //const { stringify } = require("postcss");
 
 //variables needed for weather
-var slider = document.getElementById("mile-range");
-var milesValue = document.getElementById("miles-chosen");
-var addressValue = document.getElementById("address-input")
+var beeCavesChosen = document.getElementById("bee-caves");
+var southwestChosen = document.getElementById("southwest");
+var downtownChosen = document.getElementById("downtown");
+var northChosen = document.getElementById("north");
+var southeastChosen = document.getElementById("southeast");
 
 //variables needed for fourqsuare
 var drinkEl = document.getElementById("drinks");
@@ -13,21 +15,44 @@ var foodEl = document.getElementById("food");
 var atmosphereEl = document.getElementById("atmosphere");
 var parkingEl = document.getElementById("parking");
 
+<<<<<<< HEAD
+// FOURSQUARE API REQUEST
+// foursquare Places API key fsq3Dd7JeFQQHyDysLsuKKzrNfbaWgHDH09HMsub7/9FfFA=
+
+
+const options = {
+  method: 'GET',
+  headers: {
+    Accept: 'application/json',
+    Authorization: 'fsq3Dd7JeFQQHyDysLsuKKzrNfbaWgHDH09HMsub7/9FfFA='
+  }
+};
+
+fetch('https://api.foursquare.com/v3/places/search?near=\'Austin, TX\'', options).then(response => {
+  if (response.ok) {
+      response.json().then(data => {
+          console.log(data);
+      });
+  } else {
+      alert("ERROR: NOT WORKING");
+  }
+}).catch(err => console.error(err));
+
+// Update the current slider value (each time you drag the slider handle)
+slider.oninput = function() {
+  output.innerHTML = this.value;
+}
+=======
 var weatherEl = document.getElementById("weather-results");
 var locationEl = document.getElementById("location-results");
 var popularEl = document.getElementById("popular-events");
+>>>>>>> JeffryBranch
 
 //variables needed for functions and functionalty
 var wrapEl = document.getElementById("wrap");
 var sectionEl = document.getElementById("section");
 var errorEl = document.getElementById("error");
 var submitButton = document.getElementById("submit-button");
-
-//slider bar functionality
-milesValue.innerHTML = slider.value; // Display the default slider value
-slider.oninput = function() {
-  milesValue.innerHTML = this.value;
-}
 
 //foursquare API
 const options = {
@@ -98,20 +123,18 @@ parkingEl.addEventListener('click', function () {
   var parkingResults = document.getElementById("parking-results");
   if (parkingResults.classList.contains("hide")) {
   parkingResults.classList.remove("hide");
-  } else{
+  } else {
     parkingResults.classList.add("hide");
   }
   console.log("clicked parking");
 });
 
+<<<<<<< HEAD
+=======
 
 //testing to store miles and range
 function submitResults () {
-  console.log(milesValue.innerHTML);
-  console.log(addressValue.value);
-  //var finalMiles = milesValue.innerHTML;
-  //var finalAddress = addressValue.value;
-  if (!addressValue.value) {
+  if (!beeCavesChosen && !southeastChosen && !downtownChosen && !northChosen && !southeastChosen) {
     errorEl.classList.remove("hide");
     return;
   }
@@ -126,3 +149,4 @@ function submitResults () {
  
 //event listeners on buttons
 submitButton.addEventListener('click', submitResults);
+>>>>>>> JeffryBranch
