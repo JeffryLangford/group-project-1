@@ -40,11 +40,11 @@
                 </ul>
             </div>
             <br>
-            <h2 class="text-xl">Choose which tags you'd like to see in your results:</h2>
+            <h2 class="text-xl">Choose which category you'd like to see in your results:</h2>
             </div>
             <section id="section" class="border-b-4 border-black p-3 columns-6 inline-flex justify-around w-5/6">
                 <ul>
-                    <input id="drinks" type="radio"></input>
+                    <input name="category-selector" id="drinks" type="radio" value="drinks"></input>
                     <h3 class="px-2 text-lg">drinks</h3>
                     <div id="drink-results" class="hide mt-3">
                         <li>
@@ -70,7 +70,7 @@
                     </div>
                 </ul>
                 <ul>
-                    <input id="entertainment" type="radio"></input>
+                    <input name="category-selector" id="entertainment" type="radio" value="entertainment"></input>
                     <h3 class="text-lg">entertainment</h3>
                     <div id="entertainment-results" class="hide mt-3">
                         <li>
@@ -96,7 +96,7 @@
                     </div>
                 </ul>
                 <ul>
-                    <input id="active" type="radio"></input>
+                    <input name="category-selector" id="active" type="radio" value="active"></input>
                     <h3 class="text-lg">active</h3>
                     <div id="active-results" class="hide mt-3">
                         <li>
@@ -122,7 +122,7 @@
                     </div>
                 </ul>
                 <ul>
-                    <input id="food" type="radio"></input>
+                    <input name="category-selector" id="food" type="radio" value="food"></input>
                     <h3 class="text-lg">food</h3>
                     <div id="food-results" class="hide mt-3">
                         <li>
@@ -148,8 +148,8 @@
                     </div>
                 </ul>
                 <ul>
-                    <input id="atmosphere" type="radio"></input>
-                    <h3 class="text-lg">atmosphere</h3>
+                    <input name="category-selector" id="atmosphere" type="radio" value="outdoors"></input>
+                    <h3 class="text-lg">Outdoors</h3>
                     <div id="atmosphere-results" class="hide mt-3">
                         <li>
                             <input type="radio"></input>
@@ -173,7 +173,7 @@
                         </li>
                     </div>
                 </ul>
-                <ul>
+                <!-- <ul>
                     <input id="parking" type="radio"></input>
                     <h3 class="text-lg">parking</h3>
                     <div id="parking-results" class="hide mt-3">
@@ -198,10 +198,10 @@
                         <p class="text-base">valet</p>
                         </li>
                     </div>
-                </ul>
+                </ul> -->
             </section>
         </div>
-        <p id="error" class="text-red-700 mt-4 text-xl hide">Please choose a zone for your results.</p>
+        <p id="error" class="text-red-700 mt-4 text-xl hide">Please choose both a zone and a category for your results.</p>
         <br>
         <button id="submit-button" class="m-4 text-white bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded">Submit</button>
         <div id="weather-results" class="border-b-4 border-black hide py-2 m-4">
@@ -209,19 +209,19 @@
             <p>It will be windy with a wind-chill of 36 degrees.<p>
         </div>
         <div id="location-results" class="border-b-4 border-black hide py-2 m-4">
-            <h2 class="text-xl">These are some of the events matching your tags:</h2>
-            <ul>
-                <a href="" class="text-blue-500 hover:blue-700 hover:underline">Click here.</a>
+            <h2 class="text-xl">These are the top places matching your tags:</h2>
+            <ul id="location-results-list">
+                <!-- <li><a href="https://google.com/search?q=Alamo+Drafthouse+Cinema+1120+S+Lamar+Blvd,+Austin,+TX+78704" class="text-blue-500 hover:blue-700 hover:underline">1.) Alamo Drafthouse Cinema - 1120 S Lamar Blvd, Austin, TX 78704</a></li>
                 <a href="" class="text-blue-500 hover:blue-700 hover:underline">Click here.</a>  
-                <a href="" class="text-blue-500 hover:blue-700 hover:underline">Click here.</a>
+                <a href="" class="text-blue-500 hover:blue-700 hover:underline">Click here.</a> -->
             </ul> 
         </div>
-        <div id="popular-events" class="border-b-4 border-black hide py-2 m-4">
-            <h2 class="text-xl">You might want to check out these popular events in your area:</h2>
-            <ul>
-                <a href="" class="text-blue-500 hover:blue-700 hover:underline">Click here.</a>
+        <div id="popular-places" class="border-b-4 border-black hide py-2 m-4">
+            <h2 class="text-xl">You might want to check out these popular places that match your category:</h2>
+            <ul id="popular-places-list">
+                <!-- <a href="" class="text-blue-500 hover:blue-700 hover:underline">Click here.</a>
                 <a href="" class="text-blue-500 hover:blue-700 hover:underline">Click here.</a>  
-                <a href="" class="text-blue-500 hover:blue-700 hover:underline">Click here.</a>
+                <a href="" class="text-blue-500 hover:blue-700 hover:underline">Click here.</a> -->
             </ul>
         </div>
         <button id="go-back-button" class="m-2 text-white bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded hide">Go Back</button>
