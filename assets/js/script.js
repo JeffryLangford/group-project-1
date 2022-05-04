@@ -164,7 +164,7 @@ parkingEl.addEventListener('click', function () {
 function submitResults () {
   // grab selected zone
   var locationSelectorEl = document.getElementsByName('location-selector');
-  var selected = Array.from(locationSelectorEl).find(location => location.checked).value;
+  var selected = Array.from(locationSelectorEl).find(location => location.checked);
 
   // make sure zone was selected
   if (!selected) {
@@ -173,10 +173,10 @@ function submitResults () {
   }
   
   // if zone selected grab related zone object
-  zoneSelected = selectZoneHandler(selected);
+  zoneSelected = selectZoneHandler(selected.value);
   
   // testing the zone was selected
-  console.log(zoneSelected.lat, zoneSelected.lon);
+  console.log(zoneSelected);
 
   wrapEl.classList.add("hide");
   sectionEl.classList.add("hide");
@@ -194,4 +194,4 @@ function goBack () {
  
 //event listeners on buttons
 submitButton.addEventListener('click', submitResults);
-goBackButton.addEventListener('click', goBack)
+goBackButton.addEventListener('click', goBack);
