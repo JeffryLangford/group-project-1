@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Group Project 1</title>
+    <title>Date Night in Austin</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" integrity="sha512-wnea99uKIC3TJF7v4eKk4Y+lMz2Mklv18+r4na2Gn1abDRPPOeef95xTzdwGD9e6zXJBteMIhZ1+68QC5byJZw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
@@ -15,7 +15,7 @@
     <main class="text-center p-3">
         <div id="wrap">
             <h2 class="text-xl">Where would you like to search?</h2>
-            <div class="border-b-4 border-black columns-5 my-2 pb-6">
+            <section class="border-b-4 border-black my-2 pb-6 columns-5">
                 <ul class="inline-flex">
                     <li class="mx-4">
                         <input name="location-selector" value="bee-caves" id="bee-caves" type="radio"></input>
@@ -38,191 +38,49 @@
                         <h3 class="px-2 text-lg">Southeast Austin</h3>
                     </li>
                 </ul>
-            </div>
+            </section>
             <br>
             <h2 class="text-xl">Choose which category you'd like to see in your results:</h2>
             </div>
-            <section id="section" class="border-b-4 border-black p-3 columns-6 inline-flex justify-around w-5/6">
-                <ul>
-                    <input name="category-selector" id="drinks" type="radio" value="drinks"></input>
-                    <h3 class="px-2 text-lg">drinks</h3>
-                    <div id="drink-results" class="hide mt-3">
-                        <li>
-                            <input type="radio"></input>
-                            <p class="text-base">wine</p>
-                        </li>
-                        <li>
-                            <input type="radio"></input>
-                            <p class="text-base">beer</p>
-                        </li>
-                        <li>
-                            <input type="radio"></input>
-                        <p class="text-base">cocktails</p>
-                        </li>
-                        <li>
-                            <input type="radio"></input>
-                            <p class="text-base">liquor</p>
-                        </li>
-                        <li>
-                            <input type="radio"></input>
-                        <p class="text-base">non-alcoholic</p>
-                        </li>
-                    </div>
+            <section id="section" class="border-b-4 border-black my-2 pb-6 columns-5">
+                <ul class="inline-flex content-center">
+                    <li class="mx-6">
+                        <input name="category-selector" id="drinks" type="radio" value="drinks"></input>
+                        <h3 class="px-2 text-lg">drinks</h3>
+                    </li>
+                    <li class="mx-6">
+                        <input name="category-selector" id="entertainment" type="radio" value="entertainment"></input>
+                        <h3 class="text-lg">entertainment</h3>
+                    </li>
+                    <li class="mx-6">
+                        <input name="category-selector" id="active" type="radio" value="active"></input>
+                        <h3 class="text-lg">active</h3>
+                    </li>
+                    <li class="mx-6">
+                        <input name="category-selector" id="food" type="radio" value="food"></input>
+                        <h3 class="text-lg">food</h3>
+                    </li>
+                    <li class="mx-6">
+                        <input name="category-selector" id="atmosphere" type="radio" value="outdoors"></input>
+                        <h3 class="text-lg">outdoors</h3>
+                    </li>
                 </ul>
-                <ul>
-                    <input name="category-selector" id="entertainment" type="radio" value="entertainment"></input>
-                    <h3 class="text-lg">entertainment</h3>
-                    <div id="entertainment-results" class="hide mt-3">
-                        <li>
-                            <input type="radio"></input>
-                            <p class="text-base">movies</p>
-                        </li>
-                        <li>
-                            <input type="radio"></input>
-                            <p class="text-base">comedy</p>
-                        </li>
-                        <li>
-                            <input type="radio"></input>
-                        <p class="text-base">nightlife</p>
-                        </li>
-                        <li>
-                            <input type="radio"></input>
-                            <p class="text-base">placeholder</p>
-                        </li>
-                        <li>
-                            <input type="radio"></input>
-                        <p class="text-base">placeholder</p>
-                        </li>
-                    </div>
-                </ul>
-                <ul>
-                    <input name="category-selector" id="active" type="radio" value="active"></input>
-                    <h3 class="text-lg">active</h3>
-                    <div id="active-results" class="hide mt-3">
-                        <li>
-                            <input type="radio"></input>
-                            <p class="text-base">hiking</p>
-                        </li>
-                        <li>
-                            <input type="radio"></input>
-                            <p class="text-base">yoga</p>
-                        </li>
-                        <li>
-                            <input type="radio"></input>
-                        <p class="text-base">paintball</p>
-                        </li>
-                        <li>
-                            <input type="radio"></input>
-                            <p class="text-base">axe-throwing</p>
-                        </li>
-                        <li>
-                            <input type="radio"></input>
-                        <p class="text-base">pickle-ball</p>
-                        </li>
-                    </div>
-                </ul>
-                <ul>
-                    <input name="category-selector" id="food" type="radio" value="food"></input>
-                    <h3 class="text-lg">food</h3>
-                    <div id="food-results" class="hide mt-3">
-                        <li>
-                            <input type="radio"></input>
-                            <p class="text-base">food trucks</p>
-                        </li>
-                        <li>
-                            <input type="radio"></input>
-                            <p class="text-base">tacos</p>
-                        </li>
-                        <li>
-                            <input type="radio"></input>
-                        <p class="text-base">sushi</p>
-                        </li>
-                        <li>
-                            <input type="radio"></input>
-                            <p class="text-base">mexican</p>
-                        </li>
-                        <li>
-                            <input type="radio"></input>
-                        <p class="text-base">vegan/vegetarian</p>
-                        </li>
-                    </div>
-                </ul>
-                <ul>
-                    <input name="category-selector" id="atmosphere" type="radio" value="outdoors"></input>
-                    <h3 class="text-lg">Outdoors</h3>
-                    <div id="atmosphere-results" class="hide mt-3">
-                        <li>
-                            <input type="radio"></input>
-                            <p class="text-base">casual</p>
-                        </li>
-                        <li>
-                            <input type="radio"></input>
-                            <p class="text-base">dressy</p>
-                        </li>
-                        <li>
-                            <input type="radio"></input>
-                        <p class="text-base">date-night</p>
-                        </li>
-                        <li>
-                            <input type="radio"></input>
-                            <p class="text-base">animal-friendly</p>
-                        </li>
-                        <li>
-                            <input type="radio"></input>
-                        <p class="text-base">child-friendly</p>
-                        </li>
-                    </div>
-                </ul>
-                <!-- <ul>
-                    <input id="parking" type="radio"></input>
-                    <h3 class="text-lg">parking</h3>
-                    <div id="parking-results" class="hide mt-3">
-                        <li>
-                            <input type="radio"></input>
-                            <p class="text-base">free</p>
-                        </li>
-                        <li>
-                            <input type="radio"></input>
-                            <p class="text-base">paid</p>
-                        </li>
-                        <li>
-                            <input type="radio"></input>
-                        <p class="text-base">limited</p>
-                        </li>
-                        <li>
-                            <input type="radio"></input>
-                            <p class="text-base">parking garage</p>
-                        </li>
-                        <li>
-                            <input type="radio"></input>
-                        <p class="text-base">valet</p>
-                        </li>
-                    </div>
-                </ul> -->
             </section>
         </div>
         <p id="error" class="text-red-700 mt-4 text-xl hide">Please choose both a zone and a category for your results.</p>
         <br>
-        <button id="submit-button" class="m-4 text-white bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded">Submit</button>
+        <button id="submit-button" class="mx-4 text-white bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded">Submit</button>
         <div id="weather-results" class="border-b-4 border-black hide py-2 m-4">
             <p class="text-lg">The weather today will be 42 degrees with a 30% chance of rain.</p><br>
             <p>It will be windy with a wind-chill of 36 degrees.<p>
         </div>
         <div id="location-results" class="border-b-4 border-black hide py-2 m-4">
-            <h2 class="text-xl">These are the top places matching your tags:</h2>
-            <ul id="location-results-list">
-                <!-- <li><a href="https://google.com/search?q=Alamo+Drafthouse+Cinema+1120+S+Lamar+Blvd,+Austin,+TX+78704" class="text-blue-500 hover:blue-700 hover:underline">1.) Alamo Drafthouse Cinema - 1120 S Lamar Blvd, Austin, TX 78704</a></li>
-                <a href="" class="text-blue-500 hover:blue-700 hover:underline">Click here.</a>  
-                <a href="" class="text-blue-500 hover:blue-700 hover:underline">Click here.</a> -->
-            </ul> 
+            <h2 class="text-xl mb-1">These are the top places matching your tags:</h2>
+            <ul id="location-results-list"></ul> 
         </div>
         <div id="popular-places" class="border-b-4 border-black hide py-2 m-4">
-            <h2 class="text-xl">You might want to check out these popular places that match your category:</h2>
-            <ul id="popular-places-list">
-                <!-- <a href="" class="text-blue-500 hover:blue-700 hover:underline">Click here.</a>
-                <a href="" class="text-blue-500 hover:blue-700 hover:underline">Click here.</a>  
-                <a href="" class="text-blue-500 hover:blue-700 hover:underline">Click here.</a> -->
-            </ul>
+            <h2 class="text-xl mb-1">You might want to check out these popular places that match your category:</h2>
+            <ul id="popular-places-list"></ul>
         </div>
         <button id="go-back-button" class="m-2 text-white bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded hide">Go Back</button>
     </main>

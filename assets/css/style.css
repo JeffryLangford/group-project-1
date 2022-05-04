@@ -511,6 +511,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
-/** {
-  background-color: rgb(77, 120, 189);
-}*/
+.nobullet {
+  list-style-type: none;
+}

@@ -156,7 +156,7 @@ const displayPlacesSelection = (results, listEl) => {
     
     // create link for list
     let placeLinkEl = document.createElement("a");
-    placeLinkEl.classList.add("text-blue-500", "hover:blue-700", "hover:underline");
+    placeLinkEl.classList.add("text-blue-500", "hover:blue-700", "hover:underline", "nobullet");
     placeLinkEl.href = urlQuery;
     placeLinkEl.target = "_blank";
     placeLinkEl.innerText = `${i+1}). ${currentPlaceName} - ${currentPlaceLocation}`;
