@@ -167,7 +167,6 @@ const displayPlacesSelection = (results, listEl) => {
     // append list item el to list el
     listEl.appendChild(placesListItemEl);
   }
-  console.log(results);
 };
 
 //when the submit button is clicked, change the page to the results page
