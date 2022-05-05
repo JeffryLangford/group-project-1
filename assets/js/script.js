@@ -47,8 +47,32 @@ const beeCaves = {
   lon: "-97.96179871839252"
 };
 
-// FOURSQUARE API
+// OPENWEATHERMAPS API
+const weatherApi = '54a0c119a5115d192186a1c181e307e9';
 
+// get weather based off zone
+const getWeatherHandler = (zone) => {
+  // grab lattitude and longitude from selected zone
+  let lat = zone.lat;
+  let lon = zone.lon;
+
+  //// set api for hourly weather based off user place selection
+  let apiUrlSelection = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely,daily,alerts&appid=${weatherApi}&units=imperial`;
+
+  // get api with specified information
+  fetch(apiUrlSelection).then(response => {
+    if (response.ok) {
+      response.json().then(data => {
+        displayPlacesWeather(data['hourly'][0]['temp']);
+      });
+    } else {
+      alert("ERROR: LINK NOT FOUND");
+    }
+  }).catch(err => console.error(err));
+};
+
+
+// FOURSQUARE API
 // foursquare authourization setup
 const optionsFoursquare = {
   method: 'GET',
@@ -142,6 +166,23 @@ const selectCategoryHandler = category => {
   return categoryIds;
 };
 
+// display weather results
+const displayPlacesWeather = (weatherResults) => {
+  let hourlyWeather = weatherResults;
+  let weatherUrl = 'https://weather.com/weather/today/l/356294623afa50086ac48c7d81d64f3deecdf8e3a5eb152599c2e0f30622bd72'
+
+
+  // create list element to append weather info to
+  let weatherLinkEl = document.createElement('a');
+
+  weatherLinkEl.href = weatherUrl;
+  weatherLinkEl.target = "_blank";
+  weatherLinkEl.innerText = hourlyWeather;
+
+  // append weather link to <a> element
+  weatherEl.appendChild(weatherLinkEl);
+};
+
 // display results in selected list element
 const displayPlacesSelection = (results, listEl) => {
 
@@ -156,7 +197,7 @@ const displayPlacesSelection = (results, listEl) => {
     
     // create link for list
     let placeLinkEl = document.createElement("a");
-    placeLinkEl.classList.add("text-blue-500", "hover:blue-700", "hover:underline", "nobullet");
+    placeLinkEl.classList.add("text-blue-500", "hover:blue-700", "hover:underline");
     placeLinkEl.href = urlQuery;
     placeLinkEl.target = "_blank";
     placeLinkEl.innerText = `${i+1}). ${currentPlaceName} - ${currentPlaceLocation}`;
@@ -203,7 +244,10 @@ function submitResults () {
 
   // get selected category
   let selectedCategory = selectCategoryHandler(selectedCategoryEl.value);
-  
+
+  // find and display weather in selected zone
+  getWeatherHandler(zoneSelected);
+
   // find and display places in selected zone
   placeSelectionHandler(zoneSelected, selectedCategory);
 };
