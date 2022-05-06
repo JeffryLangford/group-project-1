@@ -64,6 +64,7 @@ const getWeatherHandler = (zone) => {
     if (response.ok) {
       response.json().then(data => {
         displayPlacesWeather(data['hourly'][0]['temp']);
+        //console.log(data);
       });
     } else {
       alert("ERROR: LINK NOT FOUND");
@@ -71,6 +72,7 @@ const getWeatherHandler = (zone) => {
   }).catch(err => console.error(err));
 };
 
+getWeatherHandler(downtownAustin);
 
 // FOURSQUARE API
 // foursquare authourization setup
