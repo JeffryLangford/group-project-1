@@ -12,7 +12,7 @@ var weatherEl = document.getElementById("weather-results");
 var locationEl = document.getElementById("location-results");
 var popularEl = document.getElementById("popular-places");
 var locationResultsListEl = document.querySelector("#location-results-list");
-var popularResultsListEl = document.querySelector("#popular-places");
+var popularResultsListEl = document.querySelector("#popular-places-list");
 
 //variables needed for functions and functionalty
 var wrapEl = document.getElementById("wrap");
@@ -65,7 +65,7 @@ const placeSelectionHandler = (zone, category) => {
   let lon = zone.lon;
 
   // set api url results parameters based off of user selection
-  let apiUrlSelection = `https://api.foursquare.com/v3/places/search?categories=${category}&ll=${lat}%2C${lon}&radius=8047&sort=rating&limit=15`;
+  let apiUrlSelection = `https://api.foursquare.com/v3/places/search?categories=${category}&ll=${lat}%2C${lon}&radius=8047&sort=rating&limit=16`;
   
   // api url for top places of category in all austin
   let apiUrlPopular = `https://api.foursquare.com/v3/places/search?categories=${category}&ll=30.266666%2C-97.733330&radius=48281&sort=rating`;
@@ -76,6 +76,7 @@ const placeSelectionHandler = (zone, category) => {
         response.json().then(data => {
           // display the desired info from results
           displayPlacesSelection(data['results'], locationResultsListEl);
+          console.log(data['results']);
         });
     } else {
         alert("ERROR: LINK NOT FOUND");
@@ -146,26 +147,90 @@ const selectCategoryHandler = category => {
 const displayPlacesSelection = (results, listEl) => {
 
   for (let i = 0; i < results.length; i++) {
-    // grab information for list elements
-    let currentPlaceName = results[i]["name"];
-    let currentPlaceLocation = `${results[i]["location"]["address"]}, ${results[i]["location"]["locality"]}, ${results[i]["location"]["region"]} ${results[i]["location"]["postcode"]}`;
-    let urlQuery = `https://google.com/search?q=${currentPlaceName.replace(/ /g, "+")}+${currentPlaceLocation.replace(/ /g, "+")}`;
-    
-    // create list element to append the information to
-    let placesListItemEl = document.createElement("li")
-    
-    // create link for list
-    let placeLinkEl = document.createElement("a");
-    placeLinkEl.classList.add("text-blue-500", "hover:blue-700", "hover:underline", "nobullet");
-    placeLinkEl.href = urlQuery;
-    placeLinkEl.target = "_blank";
-    placeLinkEl.innerText = `${i+1}). ${currentPlaceName} - ${currentPlaceLocation}`;
+    // get fsq_id
+    let fsq_id = results[i]['fsq_id'];
+    let imgsApiUrl = `https://api.foursquare.com/v3/places/${fsq_id}/photos?sort=POPULAR&limit=1`;
+    let tipsApiUrl = `https://api.foursquare.com/v3/places/${fsq_id}/tips?sort=POPULAR&limit=1`;
 
-    // append link to list item el
-    placesListItemEl.appendChild(placeLinkEl);
+    // fetch image for each place
+    fetch(imgsApiUrl, optionsFoursquare).then(response => {
+      if (response.ok) {
+        response.json().then(imgData => {
 
-    // append list item el to list el
-    listEl.appendChild(placesListItemEl);
+          // fetch tip info for each place          
+          fetch(tipsApiUrl, optionsFoursquare).then(response => {
+            if (response.ok) {
+              response.json().then(tipData => {
+                console.log(tipData[0]['text']);
+              });
+            } else {
+                alert("ERROR: TIP LINK NOT FOUND");
+            }
+          }).catch(err => console.error(err));
+          
+          // grab information for list elements
+          let currentPlaceName = results[i]["name"];
+          let currentPlaceLocation = `${results[i]["location"]["address"]}, ${results[i]["location"]["locality"]}, ${results[i]["location"]["region"]} ${results[i]["location"]["postcode"]}`;
+          let urlQuery = `https://google.com/search?q=${currentPlaceName.replace(/ /g, "+")}+${currentPlaceLocation.replace(/ /g, "+")}`;
+          
+          // create link for list
+          let placeLinkEl = document.createElement("a");
+          placeLinkEl.href = urlQuery;
+          placeLinkEl.target = "_blank";
+          
+          // create card element to append the information to
+          let placesCardEl = document.createElement("div");
+          placesCardEl.classList.add("max-w-sm", "rounded", "overflow-hidden", "shadow-lg");
+          
+          let imgUrl;
+          if (imgData[0]){
+            imgUrl = `${imgData[0]['prefix']}original${imgData[0]['suffix']}`;
+            // create card image
+            let cardImgEl = document.createElement("img");
+            cardImgEl.classList.add("w-full", "card-img");
+            cardImgEl.src = imgUrl;
+            placesCardEl.appendChild(cardImgEl);
+          }
+
+          // div for text content
+          let cardContentEl = document.createElement("div");
+          cardContentEl.classList.add("px-6", "py-4");
+
+          // create heading
+          let cardTitleEl = document.createElement("h2");
+          cardTitleEl.classList.add("font-bold", "text-xl", "mb-2");
+          cardTitleEl.innerText = currentPlaceName;
+          cardContentEl.appendChild(cardTitleEl);
+
+          // get tips for place
+          let cardTipsEl = document.createElement("div");
+          cardTipsEl.classList.add("italic", "text-gray-700", "text-base");
+          cardTipsEl.innerText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+          cardContentEl.appendChild(cardTipsEl);
+
+          // git address for place
+          let cardAddressEl = document.createElement("address");
+          cardAddressEl.classList.add("font-bold", "text-md", "mt-2");
+          cardAddressEl.innerText = `Address: ${currentPlaceLocation}`;
+          cardContentEl.appendChild(cardAddressEl);
+
+          // append card content to card
+          placesCardEl.appendChild(cardContentEl);
+
+          // append card to link
+          placeLinkEl.appendChild(placesCardEl);
+        
+          // append link to list item el
+          // placesListItemEl.appendChild(placeLinkEl);
+
+          // append list item el to list el
+          listEl.appendChild(placeLinkEl);
+        });
+      } else {
+        alert("ERROR: IMAGE LINK NOT FOUND");
+      }
+    }).catch(err => console.error(err));
+  
   }
 };
 
