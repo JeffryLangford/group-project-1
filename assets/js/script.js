@@ -72,7 +72,7 @@ const getWeatherHandler = (zone) => {
   }).catch(err => console.error(err));
 };
 
-getWeatherHandler(downtownAustin);
+// getWeatherHandler(downtownAustin); <-- to be deleted
 
 // FOURSQUARE API
 // foursquare authourization setup
@@ -102,7 +102,6 @@ const placeSelectionHandler = (zone, category) => {
       response.json().then(data => {
         // display the desired info from results
         displayPlacesSelection(data['results'], locationResultsListEl);
-        console.log(data['results']);
       });
     } else {
         alert("ERROR: LINK NOT FOUND");
@@ -150,7 +149,7 @@ const selectCategoryHandler = category => {
   let categoryIds;
   switch (category) {
     case "drinks":
-      categoryIds = "13003%2C13029%2C13032%2C13038%2C13050%2C13059%2C13381%2C13387";
+      categoryIds = "13003,13029,13032,13038,13050,13059,13381,13387";
       break;
     case "entertainment":
       categoryIds = "10000,10001,10002,10003,10006,10010,10013,10015,10017,10022,10023";
@@ -206,14 +205,13 @@ const displayPlacesSelection = (results, listEl) => {
           fetch(tipsApiUrl, optionsFoursquare).then(response => {
             if (response.ok) {
               response.json().then(tipData => {
-                console.log(tipData[0]['text']);
                 
                 // grab information for list elements
                 let currentPlaceName = results[i]["name"];
                 let currentPlaceLocation = `${results[i]["location"]["address"]}, ${results[i]["location"]["locality"]}, ${results[i]["location"]["region"]} ${results[i]["location"]["postcode"]}`;
                 let urlQuery = `https://google.com/search?q=${currentPlaceName.replace(/ /g, "+")}+${currentPlaceLocation.replace(/ /g, "+")}`;
                 
-                // create link for list
+                // create link for list items
                 let placeLinkEl = document.createElement("a");
                 placeLinkEl.href = urlQuery;
                 placeLinkEl.target = "_blank";
@@ -269,21 +267,22 @@ const displayPlacesSelection = (results, listEl) => {
 
                 // create spans for each category
                 let categories = results[i]['categories'];
+                let buildCategorySpan = (index) => {
+                  let catSpanEl = document.createElement("span");
+                  catSpanEl.classList.add("inline-block", "bg-gray-200", "rounded-full", "px-3", "py-1", "text-sm", "font-semibold", "text-gray-700", "mr-2", "mb-2");
+                  catSpanEl.innerText = `#${categories[index]['name']}`;
+                  // append span to categories div
+                  categoriesEl.appendChild(catSpanEl);
+                }
                 if (categories.length > 0) {
+                  // multiple categories
                   for (let catNum = 0; catNum < categories.length; catNum++) {
-                    let catSpanEl = document.createElement("span");
-                    catSpanEl.classList.add("inline-block", "bg-gray-200", "rounded-full", "px-3", "py-1", "text-sm", "font-semibold", "text-gray-700", "mr-2", "mb-2");
-                    catSpanEl.innerText = `#${categories[catNum]['name']}`;
-                    // append span to categories div
-                    categoriesEl.appendChild(catSpanEl);
+                    buildCategorySpan(catNum);
                   }
                 } else {
                   if (categories[0]) {
-                    let catSpanEl = document.createElement("span");
-                    catSpanEl.classList.add("inline-block", "bg-gray-200", "rounded-full", "px-3", "py-1", "text-sm", "font-semibold", "text-gray-700", "mr-2", "mb-2");
-                    catSpanEl.innerText = `#${categories[0]['name']}`;
-                    // append span to categories div
-                    categoriesEl.appendChild(catSpanEl);
+                    // single category
+                    buildCategorySpan(0);
                   }
                 }
 
