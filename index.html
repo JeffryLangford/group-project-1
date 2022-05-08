@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/style-cards.css">
 </head>
-<body class="bg-green-100 font-serif m-4 p-4 container w-screen">
+<body class="bg-green-100 font-serif md:my-4 mx-auto p-4 container w-screen">
     <header id="header" class="text-center p-3 mb-3">
         <h1 class="font-bold text-5xl">Date-night in Austin</h1>
     </header>
@@ -75,33 +75,16 @@
             <!-- <p class="text-lg">The weather today will be 42 degrees with a 30% chance of rain.</p><br> -->
             <!-- <p>It will be windy with a wind-chill of 36 degrees.<p> -->
         </div>
-        <div id="location-results" class="border-b-4 border-black hide py-2 m-4">
-            <h2 class="text-xl mb-1">These are the top places matching your tags:</h2>
-            <!-- grid grid-flow-col sm:grid-flow-row md:grid-flow-col-dense lg:grid-flow-row-dense xl:grid-flow-col -->
-            <div id="location-results-list" class="grid grid-rows-4 grid-flow-col gap-3"> 
-                <!-- START TEST CARD -->
-                <!-- <div class="max-w-sm rounded overflow-hidden shadow-lg">
-                    <img class="w-full" src="https://fastly.4sqi.net/img/general/original/21517_SvA6boF_RCzIq9OLPjVkxMhU4ZW4-42Yv0AOhx6Ui3c.jpg" alt="Sunset in the mountains">
-                    <div class="px-6 py-4">
-                      <div class="font-bold text-xl mb-2">Moontower Saloon</div>
-                      <div class="italic text-gray-700 text-base">
-                        "This has to be one of the coolest places to go in Austin. A must see...Great times. It has everything!! Loved it.."
-                      </div>
-                      <address class="font-bold text-md mt-2">
-                        Address: 10212 Menchaca Rd, Austin, TX 78748
-                      </address>
-                    </div>
-                    <div class="px-6 pt-4 pb-2">
-                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#Lounge</span>
-                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#Burger Joint</span>
-                      </div>
-                </div> -->
-                <!-- END TEST CARD -->
+        <div id="location-results" class="border-b-4 border-black hide py-2 pb-5 m-4">
+            <h2 class="text-3xl mb-2">Checkout these top area results and what people are saying about them!</h2>
+            <p class="mb-5">(Click on a card to search for more info)</p>
+            <div id="location-results-list" class="grid grid-flow-row md:grid-rows-6 lg:grid-rows-4 md:grid-flow-col gap-3"> 
             </div> 
         </div>
-        <div id="popular-places" class="border-b-4 border-black hide py-2 m-4">
-            <h2 class="text-xl mb-1">You might want to check out these popular places that match your category:</h2>
-            <div id="popular-places-list" class="grid grid-rows-2 grid-flow-col gap-3"></div>
+        <div id="popular-places" class="border-b-4 border-black hide py-2 pb-5 m-4">
+            <h2 class="text-3xl mb-2">Top results for all zones and what people are saying about them!</h2>
+            <p class="mb-5">(Click on a card for more info)</p>
+            <div id="popular-places-list" class="grid grid-flow-row md:grid-rows-5 lg:grid-rows-2 md:grid-flow-col gap-3"></div>
         </div>
         <button id="go-back-button" class="m-2 text-white bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded hide">Go Back</button>
     </main>
