@@ -281,7 +281,7 @@ const buildPlaceCardEl = (result, imgData, tipData, listEl) => {
   }
   let cardTipsEl = document.createElement("div");
   cardTipsEl.classList.add("italic", "text-gray-700", "text-base");
-  cardTipsEl.innerText = tipText  || "No current tips available.\n Click this card for more information!";
+  cardTipsEl.innerText = tipText  || "No current tips available.\n Click this card to search for more information!";
   cardContentEl.appendChild(cardTipsEl);
 
   // get address for place
