@@ -12,10 +12,9 @@ var weatherEl = document.getElementById("weather-results");
 var locationEl = document.getElementById("location-results");
 var popularEl = document.getElementById("popular-places");
 var locationResultsListEl = document.querySelector("#location-results-list");
-var popularResultsListEl = document.querySelector("#popular-places-list");
+var popularResultsListEl = document.querySelector("#popular-places");
 
 //variables needed for functions and functionalty
-var heroEl = document.getElementById("hero");
 var wrapEl = document.getElementById("wrap");
 var sectionEl = document.getElementById("section");
 var errorEl = document.getElementById("error");
@@ -73,6 +72,8 @@ const getWeatherHandler = (zone) => {
   }).catch(err => console.error(err));
 };
 
+getWeatherHandler(zoneSelected);
+
 // FOURSQUARE API
 // foursquare authourization setup
 const optionsFoursquare = {
@@ -90,18 +91,18 @@ const placeSelectionHandler = (zone, category) => {
   let lon = zone.lon;
 
   // set api url results parameters based off of user selection
-  let apiUrlSelection = `https://api.foursquare.com/v3/places/search?categories=${category}&ll=${lat}%2C${lon}&radius=8047&sort=rating&limit=16`;
+  let apiUrlSelection = `https://api.foursquare.com/v3/places/search?categories=${category}&ll=${lat}%2C${lon}&radius=8047&sort=rating&limit=15`;
   
   // api url for top places of category in all austin
-  let apiUrlPopular = `https://api.foursquare.com/v3/places/search?categories=${category}&ll=30.266666%2C-97.733330&radius=48281&sort=rating&limit=8`;
+  let apiUrlPopular = `https://api.foursquare.com/v3/places/search?categories=${category}&ll=30.266666%2C-97.733330&radius=48281&sort=rating`;
   
   // get api with specified information
   fetch(apiUrlSelection, optionsFoursquare).then(response => {
     if (response.ok) {
-      response.json().then(data => {
-        // display the desired info from results
-        displayPlacesSelection(data['results'], locationResultsListEl);
-      });
+        response.json().then(data => {
+          // display the desired info from results
+          displayPlacesSelection(data['results'], locationResultsListEl);
+        });
     } else {
         alert("ERROR: LINK NOT FOUND");
     }
@@ -148,7 +149,7 @@ const selectCategoryHandler = category => {
   let categoryIds;
   switch (category) {
     case "drinks":
-      categoryIds = "13003,13029,13032,13038,13050,13059,13381,13387";
+      categoryIds = "13003%2C13029%2C13032%2C13038%2C13050%2C13059%2C13381%2C13387";
       break;
     case "entertainment":
       categoryIds = "10000,10001,10002,10003,10006,10010,10013,10015,10017,10022,10023";
@@ -188,147 +189,28 @@ const displayPlacesWeather = (weatherResults) => {
 const displayPlacesSelection = (results, listEl) => {
 
   for (let i = 0; i < results.length; i++) {
+    // grab information for list elements
+    let currentPlaceName = results[i]["name"];
+    let currentPlaceLocation = `${results[i]["location"]["address"]}, ${results[i]["location"]["locality"]}, ${results[i]["location"]["region"]} ${results[i]["location"]["postcode"]}`;
+    let urlQuery = `https://google.com/search?q=${currentPlaceName.replace(/ /g, "+")}+${currentPlaceLocation.replace(/ /g, "+")}`;
     
-    // get fsq_id
-    let fsq_id = results[i]['fsq_id'];
+    // create list element to append the information to
+    let placesListItemEl = document.createElement("li")
+    
+    // create link for list
+    let placeLinkEl = document.createElement("a");
+    placeLinkEl.classList.add("text-blue-500", "hover:blue-700", "hover:underline");
+    placeLinkEl.href = urlQuery;
+    placeLinkEl.target = "_blank";
+    placeLinkEl.innerText = `${i+1}). ${currentPlaceName} - ${currentPlaceLocation}`;
 
-    // set api urls
-    let imgsApiUrl = `https://api.foursquare.com/v3/places/${fsq_id}/photos?sort=POPULAR&limit=1`;
-    let tipsApiUrl = `https://api.foursquare.com/v3/places/${fsq_id}/tips?sort=POPULAR&limit=1`;
+    // append link to list item el
+    placesListItemEl.appendChild(placeLinkEl);
 
-    // fetch image for each place
-    fetch(imgsApiUrl, optionsFoursquare).then(response => {
-      if (response.ok) {
-        response.json().then(imgData => {
-          // fetch tip info for each place          
-          fetch(tipsApiUrl, optionsFoursquare).then(response => {
-            if (response.ok) {
-              response.json().then(tipData => {
-                // builds card with all data
-                buildPlaceCardEl(results[i], imgData, tipData, listEl);
-              });
-            } else {
-              let tipData;
-              // builds card with no tip data available
-              buildPlaceCardEl(results[i], imgData, tipData, listEl)
-            }
-          }).catch(err => console.error(err));
-        });
-      } else {
-        let imgData;
-        // fetch tip info for each place if no image is found         
-        fetch(tipsApiUrl, optionsFoursquare).then(response => {
-          if (response.ok) {
-            response.json().then(tipData => {
-              // builds card with tip data but no image data
-              buildPlaceCardEl(results[i], imgData, tipData, listEl);
-            });
-          } else {
-            // builds card with no tip data or image data
-            let tipData;
-            buildPlaceCardEl(results[i], imgData, tipData, listEl);
-          }
-        }).catch(err => console.error(err));
-      }
-    }).catch(err => console.error(err));
-  
+    // append list item el to list el
+    listEl.appendChild(placesListItemEl);
   }
 };
-
-// build place cards in function to pass to continue to build if some info doesn't exist 
-const buildPlaceCardEl = (result, imgData, tipData, listEl) => {
-  // grab information for list elements
-  let currentPlaceName = result["name"];
-  let currentPlaceLocation = `${result["location"]["address"]}, ${result["location"]["locality"]}, ${result["location"]["region"]} ${result["location"]["postcode"]}`;
-  let urlQuery = `https://google.com/search?q=${currentPlaceName.replace(/ /g, "+")}+${currentPlaceLocation.replace(/ /g, "+")}`;
-  
-  // create link for list items
-  let placeLinkEl = document.createElement("a");
-  placeLinkEl.href = urlQuery;
-  placeLinkEl.target = "_blank";
-  
-  // create card element to append the information to
-  let placesCardEl = document.createElement("div");
-  placesCardEl.classList.add("max-w-sm", "rounded", "overflow-hidden", "shadow-lg", "bg-green-100");
-
-  // create card image
-  let imgUrl;
-  if (imgData){
-    if (imgData.length) {
-      imgUrl = `${imgData[0]['prefix']}original${imgData[0]['suffix']}`;
-    }
-  }
-  let cardImgEl = document.createElement("img");
-  cardImgEl.classList.add("w-full", "card-img");
-  cardImgEl.src = imgUrl || './assets/images/no-image-stock.png';
-  placesCardEl.appendChild(cardImgEl);
-
-  // div for text content
-  let cardContentEl = document.createElement("div");
-  cardContentEl.classList.add("px-6", "py-4");
-
-  // create heading
-  let cardTitleEl = document.createElement("h2");
-  cardTitleEl.classList.add("font-bold", "text-xl", "mb-2");
-  cardTitleEl.innerText = currentPlaceName;
-  cardContentEl.appendChild(cardTitleEl);
-
-  // get tips for place
-  let tipText;
-  if (tipData) {
-    if(tipData.length) {
-      tipText = tipData[0]['text'];
-    }
-  }
-  let cardTipsEl = document.createElement("div");
-  cardTipsEl.classList.add("italic", "text-gray-700", "text-base");
-  cardTipsEl.innerText = tipText  || "No current tips available.\n Click this card to search for more information!";
-  cardContentEl.appendChild(cardTipsEl);
-
-  // get address for place
-  let cardAddressEl = document.createElement("address");
-  cardAddressEl.classList.add("font-bold", "text-md", "mt-2");
-  cardAddressEl.innerText = `Address: ${currentPlaceLocation}`;
-  cardContentEl.appendChild(cardAddressEl);
-
-  // append card content (title, tip, address) to card
-  placesCardEl.appendChild(cardContentEl);
-
-  // create div to hold categories
-  let categoriesEl = document.createElement("div");
-  categoriesEl.classList.add("px-6", "pt-4", "pb-2");
-
-  // create spans for each category
-  let categories = result['categories'];
-  let buildCategorySpan = (index) => {
-    let catSpanEl = document.createElement("span");
-    catSpanEl.classList.add("inline-block", "bg-gray-200", "rounded-full", "px-3", "py-1", "text-sm", "font-semibold", "text-gray-700", "mr-2", "mb-2");
-    catSpanEl.innerText = `#${categories[index]['name']}`;
-    // append span to categories div
-    categoriesEl.appendChild(catSpanEl);
-  }
-  if (categories.length > 0) {
-    // multiple categories
-    for (let catNum = 0; catNum < categories.length; catNum++) {
-      buildCategorySpan(catNum);
-    }
-  } else {
-    if (categories[0]) {
-      // single category
-      buildCategorySpan(0);
-    }
-  }
-
-  // append categories to card
-  placesCardEl.appendChild(categoriesEl);
-
-
-  // append card to link
-  placeLinkEl.appendChild(placesCardEl);
-
-  // append list item el to list el
-  listEl.appendChild(placeLinkEl);
-}
 
 //when the submit button is clicked, change the page to the results page
 function submitResults () {
@@ -348,7 +230,6 @@ function submitResults () {
   }
   
   // hide welcome page
-  heroEl.classList.add("hide");
   wrapEl.classList.add("hide");
   sectionEl.classList.add("hide");
   errorEl.classList.add("hide");
@@ -373,17 +254,12 @@ function submitResults () {
   placeSelectionHandler(zoneSelected, selectedCategory);
 };
 
-// reloads page when passed in go back button
 function goBack () {
   location.reload();
 };
-
-//event listeners on buttons
-submitButton.addEventListener('click', submitResults);
-goBackButton.addEventListener('click', goBack);
  
-
 // CATEGORY SPECIFICATION TO BE ADDED
+
 //when clicking the different categories, show more specific results
 // drinkEl.addEventListener('click', function () {
 //   var drinkResults = document.getElementById("drink-results");
@@ -444,3 +320,8 @@ goBackButton.addEventListener('click', goBack);
 //   }
 //   console.log("clicked parking");
 // });
+
+
+//event listeners on buttons
+submitButton.addEventListener('click', submitResults);
+goBackButton.addEventListener('click', goBack);
