@@ -203,13 +203,13 @@ const displayPlacesSelection = (results, listEl) => {
           fetch(tipsApiUrl, optionsFoursquare).then(response => {
             if (response.ok) {
               response.json().then(tipData => {
-                // builds card with tip data
+                // builds card with all data
                 buildPlaceCardEl(results[i], imgData, tipData, listEl);
               });
             } else {
               let tipData;
               // builds card with no tip data available
-                buildPlaceCardEl(results[i], imgData, tipData, listEl)
+              buildPlaceCardEl(results[i], imgData, tipData, listEl)
             }
           }).catch(err => console.error(err));
         });
