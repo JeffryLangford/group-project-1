@@ -9,71 +9,81 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/style-cards.css">
 </head>
-<body class="bg-green-100 font-serif md:my-4 mx-auto p-4 container w-screen">
-    <header id="header" class="text-center p-3 mb-3">
-        <h1 class="font-bold text-5xl">Date-night in Austin</h1>
-    </header>
-    <main class="text-center p-3">
+<body class="font-sans bg-green-300 font-serif m-4 p-4 container w-screen">
+    <div id="hero" class="hero-image">
+        <div class="border-l-4 border-t-4 border-r-8 border-b-8 border-green-900 full">
+            <header id="header" class="text-center p-3 mb-3">
+                <h1 class="hero-text md:text-5xl text-3xl">Date-night in Austin</h1>
+                <h2 class="sub-hero-text md:text-lg text-sm">A quick and easy way to choose where you'd like to spend your night out and plan accordingly.</h2>
+            </header>
+        </div>
+    </div>
+    <main class="text-center p-3 mt-3">
         <div id="wrap">
-            <h2 class="text-xl">Where would you like to search?</h2>
-            <section class="border-b-4 border-black my-2 pb-6 columns-5">
-                <ul class="inline-flex">
-                    <li class="mx-4">
-                        <input name="location-selector" value="bee-caves" id="bee-caves" type="radio"></input>
-                        <h3 class="px-2 text-lg">Bee Caves</h3>
-                    </li>
-                    <li class="mx-4">
-                        <input name="location-selector" value="southwest" id="southwest" type="radio"></input>
-                        <h3 class="px-2 text-lg">Southwest Austin</h3>
-                    </li>
-                    <li class="mx-4">
-                        <input name="location-selector" value="downtown" id="downtown" type="radio"></input>
-                        <h3 class="px-2 text-lg">Downtown Austin</h3>
-                    </li>
-                    <li class="mx-4">
-                        <input name="location-selector" value="north" id="north" type="radio"></input>
-                        <h3 class="px-2 text-lg">North Austin</h3>
-                    </li>
-                    <li class="mx-4">
-                        <input name="location-selector" value="southeast" id="southeast" type="radio"></input>
-                        <h3 class="px-2 text-lg">Southeast Austin</h3>
-                    </li>
-                </ul>
+            <h2 class="md:text-xl text-md">Location</h2>
+            <section class="my-2 pb-4 md:inline-flex section">
+                <label class="align-middle label relative mx-1 md:w-1/2">
+                    <input type="radio" name="location-selector" value="bee-caves" id="bee-caves" checked>
+                    <img class="border-l-2 border-t-2 border-r-4 border-b-4 border-green-900 fill hover:opacity-0" src="./assets/images/beecaves.jpg">
+                    <p class="opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 flex justify-center pt-6 text-black font-semibold text-xl">Bee Caves</p>
+                </label>
+                <label class="align-middle label relative mx-1 md:w-1/2">
+                    <input type="radio" name="location-selector" value="southwest" id="southwest" checked>
+                    <img class="border-l-2 border-t-2 border-r-4 border-b-4 border-green-900 fill hover:opacity-70" src="./assets/images/zilker.jpg">
+                    <p class="opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 flex justify-center pt-6 text-black font-semibold text-xl">Southwest Austin</p>
+                </label>
+                <label class="align-middle label relative mx-1 md:w-1/2">
+                    <input type="radio" name="location-selector" value="downtown" id="downtown" checked>
+                    <img class="border-l-2 border-t-2 border-r-4 border-b-4 border-green-900 fill hover:opacity-70" src="./assets/images/downtown.webp">
+                    <p class="opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 flex justify-center pt-6 text-black font-semibold text-xl">Downtown Austin</p>
+                </label>
+                <label class="align-middle label relative mx-1 md:w-1/2">
+                    <input type="radio" name="location-selector" value="north" id="north" checked>
+                    <img class="border-l-2 border-t-2 border-r-4 border-b-4 border-green-900 fill hover:opacity-70" src="./assets/images/northaustin.jpg">
+                    <p class="opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 flex justify-center pt-6 text-black font-semibold text-xl">North Austin</p>
+                </label>
+                <label class="align-middle label relative mx-1 md:w-1/2">
+                    <input type="radio" name="location-selector" value="southeast" id="southeast" checked>
+                    <img class="border-l-2 border-t-2 border-r-4 border-b-4 border-green-900 fill hover:opacity-70" src="./assets/images/southeast.jpg">
+                    <p class="opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 flex justify-center pt-6 text-black font-semibold text-xl">Southeast Austin</p>
+                </label>
             </section>
             <br>
-            <h2 class="text-xl">Choose which category you'd like to see in your results:</h2>
+            <h2 class="md:text-xl text-md">Category</h2>
             </div>
-            <section id="section" class="border-b-4 border-black my-2 pb-6 columns-5">
-                <ul class="inline-flex content-center">
-                    <li class="mx-6">
-                        <input name="category-selector" id="drinks" type="radio" value="drinks"></input>
-                        <h3 class="px-2 text-lg">drinks</h3>
-                    </li>
-                    <li class="mx-6">
-                        <input name="category-selector" id="entertainment" type="radio" value="entertainment"></input>
-                        <h3 class="text-lg">entertainment</h3>
-                    </li>
-                    <li class="mx-6">
-                        <input name="category-selector" id="active" type="radio" value="active"></input>
-                        <h3 class="text-lg">active</h3>
-                    </li>
-                    <li class="mx-6">
-                        <input name="category-selector" id="food" type="radio" value="food"></input>
-                        <h3 class="text-lg">food</h3>
-                    </li>
-                    <li class="mx-6">
-                        <input name="category-selector" id="atmosphere" type="radio" value="outdoors"></input>
-                        <h3 class="text-lg">outdoors</h3>
-                    </li>
-                </ul>
+            <section id="section" class="my-2 pb-4 md:inline-flex section">
+                <label class="align-middle label relative mx-1 md:w-1/2">
+                    <input type="radio" name="category-selector" id="drinks" type="radio" value="drinks" checked>
+                    <img class="border-l-2 border-t-2 border-r-4 border-b-4 border-green-900 fill img-hover-zoom img-hover" src="./assets/images/drinks.webp">
+                    <p class="opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 flex justify-center pt-6 text-black font-semibold text-xl">Drinks</p>
+                </label>
+                <label class="align-middle label relative mx-1 md:w-1/2">
+                    <input type="radio" name="category-selector" id="entertainment" type="radio" value="entertainment" checked>
+                    <img class="border-l-2 border-t-2 border-r-4 border-b-4 border-green-900 fill img-hover-zoom img-hover" src="./assets/images/entertainment.webp">
+                    <p class="opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 flex justify-center pt-6 text-black font-semibold text-xl">Entertainment</p>
+                </label>
+                <label class="align-middle label relative mx-1 md:w-1/2">
+                    <input type="radio" name="category-selector" id="active" type="radio" value="active" checked>
+                    <img class="border-l-2 border-t-2 border-r-4 border-b-4 border-green-900 fill img-hover-zoom img-hover" src="./assets/images/active.jpg">
+                    <p class="opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 flex justify-center pt-6 text-black font-semibold text-xl">Active</p>
+                </label>
+                <label class="align-middle label relative mx-1 md:w-1/2">
+                    <input type="radio" name="category-selector" id="food" type="radio" value="food" checked>
+                    <img class="border-l-2 border-t-2 border-r-4 border-b-4 border-green-900 fill img-hover-zoom img-hover" src="./assets/images/food.webp">
+                    <p class="opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 flex justify-center pt-6 text-black font-semibold text-xl">Food</p>
+                </label>
+                <label class="align-middle label relative mx-1 md:w-1/2">
+                    <input type="radio" name="category-selector" id="atmosphere" type="radio" value="outdoors" checked>
+                    <img class="border-l-2 border-t-2 border-r-4 border-b-4 border-green-900 fill img-hover-zoom img-hover" src="./assets/images/outdoors.jpg">
+                    <p class="opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 flex justify-center pt-6 text-black font-semibold text-xl">Outdoors</p>
+                </label>
             </section>
         </div>
         <p id="error" class="text-red-700 mt-4 text-xl hide">Please choose both a zone and a category for your results.</p>
         <br>
-        <button id="submit-button" class="mx-4 text-white bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded">Submit</button>
+        <button id="submit-button" class="border-l border-t border-r-2 border-b-2 border-green-900 mx-4 text-white bg-blue-500 hover:bg-blue-700 font-bold md:py-2 md:px-4 py-1 px-2 md:w-1/5 w-1/3">Submit</button>
         <div id="weather-results" class="border-b-4 border-black hide py-2 m-4">
-            <!-- <p class="text-lg">The weather today will be 42 degrees with a 30% chance of rain.</p><br> -->
-            <!-- <p>It will be windy with a wind-chill of 36 degrees.<p> -->
+            <h2 class="text-3xl mb-2">Weather</h2>
         </div>
         <div id="location-results" class="border-b-4 border-black hide py-2 pb-5 m-4">
             <h2 class="text-3xl mb-2">Checkout these top area results and what people are saying about them!</h2>
@@ -81,13 +91,16 @@
             <div id="location-results-list" class="grid grid-flow-row md:grid-rows-6 lg:grid-rows-4 md:grid-flow-col gap-3"> 
             </div> 
         </div>
-        <div id="popular-places" class="border-b-4 border-black hide py-2 pb-5 m-4">
+        <div id="popular-places" class="hide py-2 pb-5 m-4">
             <h2 class="text-3xl mb-2">Top results for all zones and what people are saying about them!</h2>
             <p class="mb-5">(Click on a card for more info)</p>
             <div id="popular-places-list" class="grid grid-flow-row md:grid-rows-5 lg:grid-rows-2 md:grid-flow-col gap-3"></div>
         </div>
-        <button id="go-back-button" class="m-2 text-white bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded hide">Go Back</button>
+        <button id="go-back-button" class="border-l border-t border-r-2 border-b-2 border-green-900 m-2 text-white bg-blue-500 hover:bg-blue-900 font-bold md:py-2 md:px-4 py-1 px-2 md:w-1/5 w-1/3 hide">Go Back</button>
     </main>
+    <footer class="text-center mt-8">
+        Copyright © Miller, Monroe, Langford 2022
+    </footer>
 </body>
 <script src="./assets/js/script.js"></script>
 </html>

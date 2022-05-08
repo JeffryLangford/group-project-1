@@ -15,6 +15,7 @@ var locationResultsListEl = document.querySelector("#location-results-list");
 var popularResultsListEl = document.querySelector("#popular-places-list");
 
 //variables needed for functions and functionalty
+var heroEl = document.getElementById("hero");
 var wrapEl = document.getElementById("wrap");
 var sectionEl = document.getElementById("section");
 var errorEl = document.getElementById("error");
@@ -248,7 +249,7 @@ const buildPlaceCardEl = (result, imgData, tipData, listEl) => {
   
   // create card element to append the information to
   let placesCardEl = document.createElement("div");
-  placesCardEl.classList.add("max-w-sm", "rounded", "overflow-hidden", "shadow-lg");
+  placesCardEl.classList.add("max-w-sm", "rounded", "overflow-hidden", "shadow-lg", "bg-green-100");
 
   // create card image
   let imgUrl;
@@ -347,6 +348,7 @@ function submitResults () {
   }
   
   // hide welcome page
+  heroEl.classList.add("hide");
   wrapEl.classList.add("hide");
   sectionEl.classList.add("hide");
   errorEl.classList.add("hide");
