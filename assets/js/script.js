@@ -72,7 +72,7 @@ const getWeatherHandler = (zone) => {
   }).catch(err => console.error(err));
 };
 
-getWeatherHandler(downtownAustin);
+getWeatherHandler();
 
 // FOURSQUARE API
 // foursquare authourization setup
