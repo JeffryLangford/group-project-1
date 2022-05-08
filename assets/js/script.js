@@ -341,3 +341,8 @@ function goBack () {
 //   }
 //   console.log("clicked parking");
 // });
+
+
+//event listeners on buttons
+submitButton.addEventListener('click', submitResults);
+goBackButton.addEventListener('click', goBack);
