@@ -12,7 +12,12 @@ var weatherEl = document.getElementById("weather-results");
 var locationEl = document.getElementById("location-results");
 var popularEl = document.getElementById("popular-places");
 var locationResultsListEl = document.querySelector("#location-results-list");
+<<<<<<< HEAD
 var popularResultsListEl = document.querySelector("#popular-places");
+=======
+var popularResultsListEl = document.querySelector("#popular-places-list");
+var weatherResultsListEl = document.querySelector("#weather-results-list");
+>>>>>>> shelbybranch
 
 //variables needed for functions and functionalty
 var wrapEl = document.getElementById("wrap");
@@ -63,8 +68,7 @@ const getWeatherHandler = (zone) => {
   fetch(apiUrlSelection).then(response => {
     if (response.ok) {
       response.json().then(data => {
-        displayPlacesWeather(data['hourly'][0]['temp']);
-        //console.log(data);
+        displayPlacesWeather(data);
       });
     } else {
       alert("ERROR: LINK NOT FOUND");
@@ -168,22 +172,39 @@ const selectCategoryHandler = category => {
   return categoryIds;
 };
 
-// display weather results
 const displayPlacesWeather = (weatherResults) => {
-  let hourlyWeather = weatherResults;
-  let weatherUrl = 'https://weather.com/weather/today/l/356294623afa50086ac48c7d81d64f3deecdf8e3a5eb152599c2e0f30622bd72'
+  
+  let weatherContentEl = document.createElement('div');
+
+  for (var i = 0; i < 5; i++) {
+    let temp = weatherResults['hourly'][i]['temp'];
+    
+    let weatherTempEl = document.createElement("h4");
+    weatherTempEl.classList.add("font-bold", "text-xl", "mb-2");
+    weatherTempEl.innerText = temp;    
+    
+    //weatherContentEl.appendChild(weatherTempEl);
+  };
+
+  weatherEl.appendChild(weatherContentEl);
+};
+
+// display weather results
+//const displayPlacesWeather = (weatherResults) => {
+  //let hourlyWeather = weatherResults;
+  //let weatherUrl = 'https://weather.com/weather/today/l/356294623afa50086ac48c7d81d64f3deecdf8e3a5eb152599c2e0f30622bd72'
 
 
   // create list element to append weather info to
-  let weatherLinkEl = document.createElement('a');
+  //let weatherLinkEl = document.createElement('a');
 
-  weatherLinkEl.href = weatherUrl;
-  weatherLinkEl.target = "_blank";
-  weatherLinkEl.innerText = hourlyWeather;
+  //weatherLinkEl.href = weatherUrl;
+  //weatherLinkEl.target = "_blank";
+  //weatherLinkEl.innerText = hourlyWeather;
 
   // append weather link to <a> element
-  weatherEl.appendChild(weatherLinkEl);
-};
+  //weatherEl.appendChild(weatherLinkEl);/
+//};
 
 // display results in selected list element
 const displayPlacesSelection = (results, listEl) => {
@@ -320,8 +341,3 @@ function goBack () {
 //   }
 //   console.log("clicked parking");
 // });
-
-
-//event listeners on buttons
-submitButton.addEventListener('click', submitResults);
-goBackButton.addEventListener('click', goBack);
