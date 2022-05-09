@@ -170,6 +170,7 @@ const selectCategoryHandler = category => {
 
 const displayPlacesWeather = (weatherResults) => {
   let weatherContentEl = document.createElement('div');
+  weatherContentEl.classList.add("flex", "grid", "grid-cols-5", "h-25", "bg-green-100");
 
   for (var i = 0; i < 5; i++) {
     // define varibles for use in weather display element
@@ -179,30 +180,33 @@ const displayPlacesWeather = (weatherResults) => {
     let forecastDescription = weatherForecast['weather'][0]['description'];
     let forecastIcon = weatherForecast['weather'][0]['icon'];
     let iconUrl = `http://openweathermap.org/img/wn/${forecastIcon}@2x.png`;
-    
-    // get hour
-    let forecastHour = new Date(forecastDateTime*1000);
-    let forecastHourEl = document.createElement('p');
-    forecastHourEl.innerText = `${forecastHour.toLocaleTimeString('en-US')}`;
-    weatherContentEl.appendChild(forecastHourEl);
 
     // get forecast icon
     let forecastIconEl = document.createElement('img');
     forecastIconEl.src = iconUrl;
+    forecastIconEl.classList.add("order-first", "mx-auto", "w-14", "h-14");
     weatherContentEl.appendChild(forecastIconEl);
 
     // get tempurature
-    let forecastTempEl = document.createElement("h4");
-    forecastTempEl.classList.add("font-bold", "text-xl", "mb-2");
+    let forecastTempEl = document.createElement("p");
+    forecastTempEl.classList.add("order-2", "font-bold", "text-sm");
     forecastTempEl.innerText = `${forecastTemp} °F`;    
     weatherContentEl.appendChild(forecastTempEl);
 
     // get description
     let forecastDescriptionEl = document.createElement('p');
     forecastDescriptionEl.innerText = forecastDescription;
+    forecastDescriptionEl.classList.add("order-3", "italic", "text-xs")
     weatherContentEl.appendChild(forecastDescriptionEl);
-  };
 
+    // get hour
+    let forecastHour = new Date(forecastDateTime*1000);
+    let forecastHourEl = document.createElement('p');
+    forecastHourEl.innerText = `${forecastHour.toLocaleTimeString('en-US')}`;
+    forecastHourEl.classList.add("order-last", "text-xs", "font-bold")
+    weatherContentEl.appendChild(forecastHourEl);
+  };
+  
   weatherEl.appendChild(weatherContentEl);
 };
 
