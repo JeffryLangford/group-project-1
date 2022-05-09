@@ -275,7 +275,7 @@ const buildPlaceCardEl = (result, imgData, tipData, listEl) => {
   
   // create card element to append the information to
   let placesCardEl = document.createElement("div");
-  placesCardEl.classList.add("max-w-sm", "rounded", "overflow-hidden", "shadow-lg", "bg-green-100");
+  placesCardEl.classList.add("max-w-sm", "rounded", "overflow-hidden", "shadow-lg", "bg-green-100", "hover:bg-blue-100");
 
   // create card image
   let imgUrl;
