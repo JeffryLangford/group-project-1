@@ -15,6 +15,7 @@ var locationResultsListEl = document.querySelector("#location-results-list");
 var popularResultsListEl = document.querySelector("#popular-places-list");
 var weatherResultsListEl = document.querySelector("#weather-results-list");
 
+
 //variables needed for functions and functionalty
 var heroEl = document.getElementById("hero");
 var wrapEl = document.getElementById("wrap");
@@ -168,38 +169,46 @@ const selectCategoryHandler = category => {
 };
 
 const displayPlacesWeather = (weatherResults) => {
-  
   let weatherContentEl = document.createElement('div');
+  weatherContentEl.classList.add("flex", "grid", "grid-cols-5", "h-25", "bg-green-100");
 
   for (var i = 0; i < 5; i++) {
-    let temp = weatherResults['hourly'][i]['temp'];
-    
-    let weatherTempEl = document.createElement("h4");
-    weatherTempEl.classList.add("font-bold", "text-xl", "mb-2");
-    weatherTempEl.innerText = temp;    
-    
-    //weatherContentEl.appendChild(weatherTempEl);
-  };
+    // define varibles for use in weather display element
+    let weatherForecast = weatherResults['hourly'][i];
+    let forecastTemp = weatherForecast['temp'];
+    let forecastDateTime = weatherForecast['dt'];
+    let forecastDescription = weatherForecast['weather'][0]['description'];
+    let forecastIcon = weatherForecast['weather'][0]['icon'];
+    let iconUrl = `http://openweathermap.org/img/wn/${forecastIcon}@2x.png`;
 
+    // get forecast icon
+    let forecastIconEl = document.createElement('img');
+    forecastIconEl.src = iconUrl;
+    forecastIconEl.classList.add("order-first", "mx-auto", "w-14", "h-14");
+    weatherContentEl.appendChild(forecastIconEl);
+
+    // get tempurature
+    let forecastTempEl = document.createElement("p");
+    forecastTempEl.classList.add("order-2", "font-bold", "text-sm");
+    forecastTempEl.innerText = `${forecastTemp} °F`;    
+    weatherContentEl.appendChild(forecastTempEl);
+
+    // get description
+    let forecastDescriptionEl = document.createElement('p');
+    forecastDescriptionEl.innerText = forecastDescription;
+    forecastDescriptionEl.classList.add("order-3", "italic", "text-xs")
+    weatherContentEl.appendChild(forecastDescriptionEl);
+
+    // get hour
+    let forecastHour = new Date(forecastDateTime*1000);
+    let forecastHourEl = document.createElement('p');
+    forecastHourEl.innerText = `${forecastHour.toLocaleTimeString('en-US')}`;
+    forecastHourEl.classList.add("order-last", "text-xs", "font-bold")
+    weatherContentEl.appendChild(forecastHourEl);
+  };
+  
   weatherEl.appendChild(weatherContentEl);
 };
-
-// display weather results
-//const displayPlacesWeather = (weatherResults) => {
-  //let hourlyWeather = weatherResults;
-  //let weatherUrl = 'https://weather.com/weather/today/l/356294623afa50086ac48c7d81d64f3deecdf8e3a5eb152599c2e0f30622bd72'
-
-
-  // create list element to append weather info to
-  //let weatherLinkEl = document.createElement('a');
-
-  //weatherLinkEl.href = weatherUrl;
-  //weatherLinkEl.target = "_blank";
-  //weatherLinkEl.innerText = hourlyWeather;
-
-  // append weather link to <a> element
-  //weatherEl.appendChild(weatherLinkEl);/
-//};
 
 // display results in selected list element
 const displayPlacesSelection = (results, listEl) => {
