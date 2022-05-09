@@ -13,8 +13,11 @@ var locationEl = document.getElementById("location-results");
 var popularEl = document.getElementById("popular-places");
 var locationResultsListEl = document.querySelector("#location-results-list");
 var popularResultsListEl = document.querySelector("#popular-places-list");
+var weatherResultsListEl = document.querySelector("#weather-results-list");
+
 
 //variables needed for functions and functionalty
+var heroEl = document.getElementById("hero");
 var wrapEl = document.getElementById("wrap");
 var sectionEl = document.getElementById("section");
 var errorEl = document.getElementById("error");
@@ -63,8 +66,7 @@ const getWeatherHandler = (zone) => {
   fetch(apiUrlSelection).then(response => {
     if (response.ok) {
       response.json().then(data => {
-        displayPlacesWeather(data['hourly'][0]['temp']);
-        //console.log(data);
+        displayPlacesWeather(data);
       });
     } else {
       alert("ERROR: LINK NOT FOUND");
@@ -166,21 +168,46 @@ const selectCategoryHandler = category => {
   return categoryIds;
 };
 
-// display weather results
 const displayPlacesWeather = (weatherResults) => {
-  let hourlyWeather = weatherResults;
-  let weatherUrl = 'https://weather.com/weather/today/l/356294623afa50086ac48c7d81d64f3deecdf8e3a5eb152599c2e0f30622bd72'
+  let weatherContentEl = document.createElement('div');
+  weatherContentEl.classList.add("flex", "grid", "grid-cols-5", "h-25", "bg-green-100");
 
+  for (var i = 0; i < 5; i++) {
+    // define varibles for use in weather display element
+    let weatherForecast = weatherResults['hourly'][i];
+    let forecastTemp = weatherForecast['temp'];
+    let forecastDateTime = weatherForecast['dt'];
+    let forecastDescription = weatherForecast['weather'][0]['description'];
+    let forecastIcon = weatherForecast['weather'][0]['icon'];
+    let iconUrl = `http://openweathermap.org/img/wn/${forecastIcon}@2x.png`;
 
-  // create list element to append weather info to
-  let weatherLinkEl = document.createElement('a');
+    // get forecast icon
+    let forecastIconEl = document.createElement('img');
+    forecastIconEl.src = iconUrl;
+    forecastIconEl.classList.add("order-first", "mx-auto", "w-14", "h-14");
+    weatherContentEl.appendChild(forecastIconEl);
 
-  weatherLinkEl.href = weatherUrl;
-  weatherLinkEl.target = "_blank";
-  weatherLinkEl.innerText = hourlyWeather;
+    // get tempurature
+    let forecastTempEl = document.createElement("p");
+    forecastTempEl.classList.add("order-2", "font-bold", "text-sm");
+    forecastTempEl.innerText = `${forecastTemp} °F`;    
+    weatherContentEl.appendChild(forecastTempEl);
 
-  // append weather link to <a> element
-  weatherEl.appendChild(weatherLinkEl);
+    // get description
+    let forecastDescriptionEl = document.createElement('p');
+    forecastDescriptionEl.innerText = forecastDescription;
+    forecastDescriptionEl.classList.add("order-3", "italic", "text-xs")
+    weatherContentEl.appendChild(forecastDescriptionEl);
+
+    // get hour
+    let forecastHour = new Date(forecastDateTime*1000);
+    let forecastHourEl = document.createElement('p');
+    forecastHourEl.innerText = `${forecastHour.toLocaleTimeString('en-US')}`;
+    forecastHourEl.classList.add("order-last", "text-xs", "font-bold")
+    weatherContentEl.appendChild(forecastHourEl);
+  };
+  
+  weatherEl.appendChild(weatherContentEl);
 };
 
 // display results in selected list element
@@ -248,7 +275,7 @@ const buildPlaceCardEl = (result, imgData, tipData, listEl) => {
   
   // create card element to append the information to
   let placesCardEl = document.createElement("div");
-  placesCardEl.classList.add("max-w-sm", "rounded", "overflow-hidden", "shadow-lg");
+  placesCardEl.classList.add("max-w-sm", "rounded", "overflow-hidden", "shadow-lg", "bg-green-100", "hover:bg-blue-100");
 
   // create card image
   let imgUrl;
@@ -347,6 +374,7 @@ function submitResults () {
   }
   
   // hide welcome page
+  heroEl.classList.add("hide");
   wrapEl.classList.add("hide");
   sectionEl.classList.add("hide");
   errorEl.classList.add("hide");
